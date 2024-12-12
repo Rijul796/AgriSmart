@@ -68,6 +68,9 @@
                                         <color key="tintColor" red="0.2470588088" green="0.1686274707" blue="0.1607843041" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Buyer"/>
+                                        <connections>
+                                            <action selector="navigateToBuyer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ufX-qT-ZoX"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

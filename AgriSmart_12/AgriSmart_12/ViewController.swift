@@ -23,4 +23,15 @@ class ViewController: UIViewController {
         // Present the target view controller
         self.present(targetViewController, animated: true, completion: nil)
     }
+    
+    @IBAction func navigateToBuyer(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Consumer", bundle: nil)
+        
+        // Instantiate the view controller by its identifier
+        let targetViewController = storyboard.instantiateViewController(withIdentifier: "buyer")
+        
+        // Present the target view controller
+        self.present(targetViewController, animated: true, completion: nil)
+    }
+    
 }
