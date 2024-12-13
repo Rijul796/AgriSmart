@@ -5,61 +5,62 @@
 //  Created by Rohan Jain on 12/12/24.
 //
 
-// Section 1: Farmer Information
 import Foundation
-struct FarmersList {
-    let id: Int         // Unique identifier
-    let name: String    // Farmer's name
-    let imageName: String // Name of the image asset or URL
-    let rating: Double  // Star rating (e.g., 4.5)
+
+// MARK: - Farmer Struct
+struct Farmer {
+    var id: Int
+    var name: String
+    var profileImageUrl: String
+    var starRating: Double
 }
 
-// Section 2: Crop Information
+// MARK: - Crop Struct
 struct Crop {
-    let id: Int         // Unique identifier
-    let name: String    // Crop's name
-    let imageName: String // Name of the image asset or URL
+    var id: Int
+    var name: String
+    var imageUrl: String
 }
 
-// Section 3: Map Section
-struct MapSection {
-    let imageName: String // Name of the map image asset or URL
-}
-
-// Home Screen Data Model
-struct HomeScreen {
-    let farmers: [FarmersList]
-    let crops: [Crop]
-    let map: MapSection
-
-    // Function to sort farmers by their rating (descending order)
-    func sortedFarmersByRating() -> [FarmersList] {
-        return farmers.sorted { $0.rating > $1.rating }
+// MARK: - HomeScreenData Class
+class HomeScreenData {
+    var farmers: [Farmer]
+    var crops: [Crop]
+    var mapImageUrl: String // This can be a placeholder URL or dynamically loaded
+    
+    private init(farmers: [Farmer], crops: [Crop], mapImageUrl: String) {
+        self.farmers = farmers
+        self.crops = crops
+        self.mapImageUrl = mapImageUrl
+    }
+    
+    // MARK: - Static Sample Data
+    static func sampleData() -> HomeScreenData {
+        let farmers = [
+            Farmer(id: 1, name: "John Smith", profileImageUrl: "farmer1.jpg", starRating: 4.5),
+            Farmer(id: 2, name: "Emily Brown", profileImageUrl: "farmer2.jpg", starRating: 4.7)
+        ]
+        
+        let crops = [
+            Crop(id: 1, name: "Tomatoes", imageUrl: "crop_tomatoes.jpg"),
+            Crop(id: 2, name: "Carrots", imageUrl: "crop_carrots.jpg"),
+            Crop(id: 3, name: "Potatoes", imageUrl: "crop_potatoes.jpg")
+        ]
+        
+        let mapImageUrl = "map_placeholder.jpg" // Placeholder for map image
+        
+        return HomeScreenData(farmers: farmers, crops: crops, mapImageUrl: mapImageUrl)
     }
 }
 
-// Sample Data
-let sampleFarmersList = [
-    FarmersList(id: 1, name: "John Doe", imageName: "farmer1.jpg", rating: 4.7),
-    FarmersList(id: 2, name: "Alice Smith", imageName: "farmer2.jpg", rating: 4.9),
-    FarmersList(id: 3, name: "Robert Brown", imageName: "farmer3.jpg", rating: 4.3),
-    FarmersList(id: 4, name: "Emily Davis", imageName: "farmer4.jpg", rating: 4.8)
-]
-
-let sampleCrops = [
-    Crop(id: 1, name: "Tomatoes", imageName: "tomatoes.jpg"),
-    Crop(id: 2, name: "Potatoes", imageName: "potatoes.jpg"),
-    Crop(id: 3, name: "Carrots", imageName: "carrots.jpg"),
-    Crop(id: 4, name: "Cucumbers", imageName: "cucumbers.jpg")
-]
-
-let sampleMap = MapSection(imageName: "map.jpg")
-
-let homeScreenData = HomeScreen(farmers: sampleFarmersList, crops: sampleCrops, map: sampleMap)
-
-// Sorted Farmers by Rating
-//let sortedFarmersList = homeScreenData.sortedFarmersByRating()
-//print("Sorted Farmers by Rating:")
-//for farmer in sortedFarmersList {
-//    print("\(farmer.name): \(farmer.rating) stars")
+//func filterFarmers(byMinimumRating rating: Double) -> [Farmer] {
+//    return farmers.filter { $0.starRating >= rating }
+//}
+//
+//func sortCropsByName() -> [Crop] {
+//    return crops.sorted { $0.name < $1.name }
+//}
+//
+//func updateMapImage(withUrl newImageUrl: String) {
+//    mapImageUrl = newImageUrl
 //}

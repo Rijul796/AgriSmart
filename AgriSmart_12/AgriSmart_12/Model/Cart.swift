@@ -6,18 +6,73 @@
 //
 
 import Foundation
+
+// MARK: - CartItem Model
 struct CartItem {
-    let id: Int
+    let image: String // Image URL or resource name
     let name: String
-    let imageName: String
+    let description: String
     let pricePerKg: Double
     var quantity: Int
-    let description: String
+    
+    // Computed property for total price of this item
+    var totalPrice: Double {
+        return pricePerKg * Double(quantity)
+    }
 }
 
-let cartItems = [
-    CartItem(id: 1, name: "Organic Apple", imageName: "apple", pricePerKg: 100.0, quantity: 50, description: "50Kg, Red")
-]
+// MARK: - CartSummary Model
+struct CartSummary {
+    var subtotal: Double
+    var shippingCost: Double
+    var total: Double {
+        return subtotal + shippingCost
+    }
+}
+
+// MARK: - ShoppingCart Model
+final class ShoppingCart {
+    private(set) var items: [CartItem] = []
+    private(set) var summary: CartSummary = CartSummary(subtotal: 0, shippingCost: 0)
+    
+    private init() {}
+    static let shared = ShoppingCart() // Singleton to avoid redeclaration
+    
+    // MARK: - Methods
+    
+    // Add an item to the cart
+    func addItem(_ item: CartItem) {
+        items.append(item)
+        recalculateSummary()
+    }
+    
+    // Remove an item from the cart
+    func removeItem(at index: Int) {
+        guard index >= 0 && index < items.count else { return }
+        items.remove(at: index)
+        recalculateSummary()
+    }
+    
+    // Update the quantity of an item
+    func updateItemQuantity(at index: Int, quantity: Int) {
+        guard index >= 0 && index < items.count else { return }
+        items[index].quantity = quantity
+        recalculateSummary()
+    }
+    
+    // Recalculate the summary based on current items
+    private func recalculateSummary() {
+        let subtotal = items.reduce(0) { $0 + $1.totalPrice }
+        let shippingCost = subtotal > 0 ? 200 : 0 // Fixed shipping cost
+        summary = CartSummary(subtotal: subtotal, shippingCost: Double(shippingCost))
+    }
+    
+    // Clear the cart
+    func clearCart() {
+        items.removeAll()
+        recalculateSummary()
+    }
+}
 
 
 

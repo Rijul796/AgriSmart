@@ -7,19 +7,40 @@
 
 import Foundation
 
+import Foundation
+
+// MARK: - Message Model
 struct Message {
-    let id: Int
     let senderName: String
-    let senderImage: String
+    let senderImageURL: String // URL or path for sender's image
     let messageText: String
-    let sentTime: Date
+    let timestamp: Date
 }
 
-let farmerMessages = [
-    Message(id: 1, senderName: "Farmer John", senderImage: "farmerJohn", messageText: "Fresh organic tomatoes are available for sale!", sentTime: Date()),
-    Message(id: 2, senderName: "Farmer Lisa", senderImage: "farmerLisa", messageText: "New batch of golden wheat is ready. Check it out!", sentTime: Date().addingTimeInterval(-3600)),
-    Message(id: 3, senderName: "Farmer Raj", senderImage: "farmerRaj", messageText: "Get your fresh carrots before they run out!", sentTime: Date().addingTimeInterval(-7200))
-]
+// MARK: - MessageManager
+final class MessageManager {
+    private(set) var messages: [Message] = []
+    
+    private init() {}
+    static let shared = MessageManager() // Singleton instance to avoid redeclaration
+    
+    // Add a new message
+    func addMessage(senderName: String, senderImageURL: String, messageText: String, timestamp: Date) {
+        let newMessage = Message(senderName: senderName, senderImageURL: senderImageURL, messageText: messageText, timestamp: timestamp)
+        messages.append(newMessage)
+    }
+    
+    // Fetch all messages
+    func fetchMessages() -> [Message] {
+        return messages
+    }
+    
+    // Filter messages by sender name (for search functionality)
+    func filterMessages(by senderName: String) -> [Message] {
+        return messages.filter { $0.senderName.lowercased().contains(senderName.lowercased()) }
+    }
+}
+
 
 //import UIKit
 //

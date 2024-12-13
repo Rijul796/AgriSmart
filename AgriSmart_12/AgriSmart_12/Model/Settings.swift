@@ -6,30 +6,70 @@
 //
 
 import Foundation
-struct Setting {
+import Foundation
+
+// MARK: - SettingsItem Model
+struct SettingsItem {
     let title: String
-    let iconName: String? // Optional: Icon for the setting (if needed)
-    let action: (() -> Void)? // Action to be executed when tapped
+    let subtitle: String? // Optional for items with descriptions
+    let iconName: String? // Optional for items with icons
+    let action: (() -> Void)? // Optional action closure
 }
 
-let settings = [
-    [
-        Setting(title: "Profile", iconName: "person.circle", action: { print("Navigate to Profile") }),
-        Setting(title: "Change Password", iconName: "lock.circle", action: { print("Navigate to Change Password") })
-    ],
-    [
-        Setting(title: "Notifications", iconName: "bell.circle", action: { print("Toggle Notifications") })
-    ],
-    [
-        Setting(title: "Language", iconName: "globe", action: { print("Navigate to Language Settings") }),
-        Setting(title: "Theme", iconName: "moon.circle", action: { print("Navigate to Theme Settings") })
-    ],
-    [
-        Setting(title: "Help Center", iconName: "questionmark.circle", action: { print("Navigate to Help Center") }),
-        Setting(title: "About Us", iconName: "info.circle", action: { print("Navigate to About Us") }),
-        Setting(title: "Log Out", iconName: "arrow.right.circle", action: { print("Log Out") })
-    ]
-]
+// MARK: - SettingsSection Model
+struct SettingsSection {
+    let headerTitle: String
+    let items: [SettingsItem]
+}
+
+// MARK: - SettingsManager
+final class SettingsManager {
+    private(set) var sections: [SettingsSection] = []
+    
+    private init() {}
+    static let shared = SettingsManager() // Singleton instance to avoid redeclaration
+    
+    // Initialize sections
+    func configureSettings() {
+        sections = [
+            SettingsSection(headerTitle: "Profile", items: [
+                SettingsItem(title: "Edit Profile", subtitle: nil, iconName: "edit_icon", action: {
+                    print("Edit Profile tapped")
+                }),
+                SettingsItem(title: "Change Password", subtitle: nil, iconName: "password_icon", action: {
+                    print("Change Password tapped")
+                })
+            ]),
+            SettingsSection(headerTitle: "Notifications", items: [
+                SettingsItem(title: "Notification Settings", subtitle: nil, iconName: "notification_icon", action: {
+                    print("Notification Settings tapped")
+                })
+            ]),
+            SettingsSection(headerTitle: "Preferences", items: [
+                SettingsItem(title: "Language", subtitle: "English", iconName: "language_icon", action: {
+                    print("Language tapped")
+                }),
+                SettingsItem(title: "Theme", subtitle: "Light", iconName: "theme_icon", action: {
+                    print("Theme tapped")
+                })
+            ]),
+            SettingsSection(headerTitle: "About", items: [
+                SettingsItem(title: "Privacy Policy", subtitle: nil, iconName: "privacy_icon", action: {
+                    print("Privacy Policy tapped")
+                }),
+                SettingsItem(title: "Terms & Conditions", subtitle: nil, iconName: "terms_icon", action: {
+                    print("Terms & Conditions tapped")
+                })
+            ])
+        ]
+    }
+    
+    // Fetch all sections
+    func fetchSettingsSections() -> [SettingsSection] {
+        return sections
+    }
+}
+
 
 
 

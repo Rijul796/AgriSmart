@@ -8,24 +8,49 @@
 
 import Foundation
 
+// MARK: - FarmerProfile Struct
 struct FarmerProfile {
-    let id: Int
-    let name: String
-    let profileImage: String
-    let distance: Double
-    let rating: Double
+    var id: Int
+    var name: String
+    var profileImageUrl: String
+    var distanceFromBuyer: Double // Distance in kilometers
+    var starRating: Double
 }
 
-let sampleFarmers = [
-    FarmerProfile(id: 1, name: "John Doe", profileImage: "farmer1", distance: 2.5, rating: 4.5),
-    FarmerProfile(id: 2, name: "Jane Smith", profileImage: "farmer2", distance: 1.2, rating: 4.0),
-    FarmerProfile(id: 3, name: "Sam Green", profileImage: "farmer3", distance: 3.0, rating: 4.8)
-]
-var sortedFarmers = sampleFarmers.sorted(by: { $0.distance < $1.distance })
-
-func searchFarmers(query: String) -> [FarmerProfile] {
-    return sampleFarmers.filter { $0.name.lowercased().contains(query.lowercased()) }
+// MARK: - FarmerProfileListing Class
+class FarmerProfileListing {
+    private(set) var farmers: [FarmerProfile]
+    
+    private init(farmers: [FarmerProfile]) {
+        self.farmers = farmers
+    }
+    
+    // MARK: - Static Sample Data
+    static func sampleData() -> FarmerProfileListing {
+        let farmers = [
+            FarmerProfile(id: 1, name: "John Smith", profileImageUrl: "farmer1.jpg", distanceFromBuyer: 2.5, starRating: 4.5),
+            FarmerProfile(id: 2, name: "Emily Brown", profileImageUrl: "farmer2.jpg", distanceFromBuyer: 1.2, starRating: 4.7),
+            FarmerProfile(id: 3, name: "Michael Green", profileImageUrl: "farmer3.jpg", distanceFromBuyer: 3.8, starRating: 4.2)
+        ]
+        return FarmerProfileListing(farmers: farmers)
+    }
+    
+    // MARK: - Search Functionality
+    func searchFarmers(byName name: String) -> [FarmerProfile] {
+        return farmers.filter { $0.name.lowercased().contains(name.lowercased()) }
+    }
+    
+    // MARK: - Sorting Functionality
+    func sortFarmersByNearest() -> [FarmerProfile] {
+        return farmers.sorted { $0.distanceFromBuyer < $1.distanceFromBuyer }
+    }
+    
+    // MARK: - Access Farmer Profile
+    func getFarmerProfile(byId id: Int) -> FarmerProfile? {
+        return farmers.first { $0.id == id }
+    }
 }
+
 
 
 //import UIKit

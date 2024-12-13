@@ -6,40 +6,79 @@
 //
 
 import Foundation
-struct OrderDetail {
-    let orderId: Int
-    let items: [CartItem]
-    let totalAmount: Double
-    let shippingCost: Double
-    let grandTotal: Double
+import Foundation
+
+// MARK: - OrderItem Model
+struct OrderItem {
+    let name: String
+    let quantity: Int
+    let price: Double
 }
 
+// MARK: - Address Model
 struct Address {
     var fullName: String
     var addressLine1: String
     var addressLine2: String?
     var city: String
     var state: String
-    var postalCode: String
-    var phoneNumber: String
+    var zipCode: String
+    var contactNumber: String
 }
 
-let orderDetail = OrderDetail(
-    orderId: 12345,
-    items: [
-        CartItem(id: 1, name: "Organic Apple", imageName: "apple", pricePerKg: 100.0, quantity: 50, description: "50Kg, Red")
-    ],
-    totalAmount: 5000.0,
-    shippingCost: 200.0,
-    grandTotal: 5200.0
-)
+// MARK: - PaymentOption Enum
+enum PaymentOption: String {
+    case creditCard = "Credit Card"
+    case upi = "UPI"
+    case cashOnDelivery = "Cash on Delivery"
+}
 
-var address = Address(
-    fullName: "",
-    addressLine1: "",
-    addressLine2: nil,
-    city: "",
-    state: "",
-    postalCode: "",
-    phoneNumber: ""
-)
+// MARK: - Checkout Model
+final class Checkout {
+    private(set) var orderItems: [OrderItem] = []
+    private(set) var address: Address?
+    private(set) var paymentOption: PaymentOption?
+    
+    private init() {}
+    static let shared = Checkout() // Singleton to avoid redeclaration
+    
+    // MARK: - Methods
+    
+    // Add an order item
+    func addOrderItem(name: String, quantity: Int, price: Double) {
+        let newItem = OrderItem(name: name, quantity: quantity, price: price)
+        orderItems.append(newItem)
+    }
+    
+    // Set the delivery address
+    func setAddress(fullName: String, addressLine1: String, addressLine2: String?, city: String, state: String, zipCode: String, contactNumber: String) {
+        address = Address(
+            fullName: fullName,
+            addressLine1: addressLine1,
+            addressLine2: addressLine2,
+            city: city,
+            state: state,
+            zipCode: zipCode,
+            contactNumber: contactNumber
+        )
+    }
+    
+    // Set the payment option
+    func setPaymentOption(_ option: PaymentOption) {
+        paymentOption = option
+    }
+    
+    // Calculate total price of the order
+    func calculateTotalPrice() -> Double {
+        return orderItems.reduce(0) { $0 + ($1.price * Double($1.quantity)) }
+    }
+    
+    // Confirm order
+    func confirmOrder() -> Bool {
+        guard !orderItems.isEmpty, address != nil, paymentOption != nil else {
+            return false
+        }
+        print("Order Confirmed!")
+        return true
+    }
+}

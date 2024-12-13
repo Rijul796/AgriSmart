@@ -7,19 +7,40 @@
 
 import Foundation
 
+import Foundation
+
+// MARK: - CropExplore Model
 struct CropExplore {
-    let id: Int
     let name: String
-    let imageName: String
+    let imageURL: String // URL or path for crop image
     let pricePerKg: Double
-    let rating: Double
+    let rating: Double // Rating out of 5
 }
 
-let crops = [
-    CropExplore(id: 1, name: "Tomato", imageName: "tomato", pricePerKg: 2.5, rating: 4.2),
-    CropExplore(id: 2, name: "Potato", imageName: "potato", pricePerKg: 1.8, rating: 4.5),
-    CropExplore(id: 3, name: "Carrot", imageName: "carrot", pricePerKg: 3.0, rating: 4.0)
-]
+// MARK: - ExploreManager
+final class ExploreManager {
+    private(set) var crops: [CropExplore] = []
+    
+    private init() {}
+    static let shared = ExploreManager() // Singleton instance to avoid redeclaration
+    
+    // Add a new crop to the list
+    func addCrop(name: String, imageURL: String, pricePerKg: Double, rating: Double) {
+        let newCrop = CropExplore(name: name, imageURL: imageURL, pricePerKg: pricePerKg, rating: rating)
+        crops.append(newCrop)
+    }
+    
+    // Fetch all crops
+    func fetchCrops() -> [CropExplore] {
+        return crops
+    }
+    
+    // Search crops by name
+    func searchCrops(by name: String) -> [CropExplore] {
+        return crops.filter { $0.name.lowercased().contains(name.lowercased()) }
+    }
+}
+
 
 // View Controller
 
