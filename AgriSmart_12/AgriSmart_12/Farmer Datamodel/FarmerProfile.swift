@@ -6,7 +6,7 @@
 //
 
 import UIKit
-struct FarmerProfile {
+struct FarmerProfile1 {
     let id: String            // Unique identifier for the farmer
     var name: String          // Farmer's name
     var email: String         // Farmer's email address

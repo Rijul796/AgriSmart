@@ -5,6 +5,7 @@
 //  Created by student-2 on 12/12/24.
 //
 import UIKit
+import Foundation
 
 struct Notification {
     let id: String            // Unique identifier for the notification

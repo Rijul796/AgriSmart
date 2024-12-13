@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 struct NewProduct {
     var name: String
     var category: String

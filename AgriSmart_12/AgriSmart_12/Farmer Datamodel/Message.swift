@@ -6,7 +6,8 @@
 //
 
 import UIKit
-struct Message {
+import Foundation
+struct Messages {
     let id: String            // Unique identifier for the message
     let chatId: String        // Reference to the chat
     let senderId: String      // ID of the sender (farmer or consumer)
