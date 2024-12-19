@@ -9,7 +9,7 @@ import Foundation
 import Foundation
 
 // MARK: - OrderItem Model
-struct OrderItemCheckout {
+struct OrderItem {
     let name: String
     let quantity: Int
     let price: Double
@@ -35,7 +35,7 @@ enum PaymentOption: String {
 
 // MARK: - Checkout Model
 final class Checkout {
-    private(set) var orderItems: [OrderItemCheckout] = []
+    private(set) var orderItems: [OrderItem] = []
     private(set) var address: Address?
     private(set) var paymentOption: PaymentOption?
     
@@ -46,7 +46,7 @@ final class Checkout {
     
     // Add an order item
     func addOrderItem(name: String, quantity: Int, price: Double) {
-        let newItem = OrderItemCheckout(name: name, quantity: quantity, price: price)
+        let newItem = OrderItem(name: name, quantity: quantity, price: price)
         orderItems.append(newItem)
     }
     
