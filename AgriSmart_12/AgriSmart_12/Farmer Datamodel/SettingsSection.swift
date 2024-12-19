@@ -6,12 +6,12 @@
 //
 
 import UIKit
-struct SettingsSection {
+struct SettingsSectionFarmer {
     let title: String             // Title of the section (e.g., "Account Settings")
     let items: [SettingsItem]     // List of settings items in the section
 }
 
-struct SettingsItem {
+struct SettingsItemFarmer{
     let title: String             // Title of the setting (e.g., "Edit Profile")
     let icon: String?             // Optional icon name for the setting
     let actionType: SettingsActionType // Defines the action for the item

@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Farmer Struct
-struct Farmer {
+struct Farmer1 {
     var id: Int
     var name: String
     var profileImageUrl: String
@@ -24,11 +24,11 @@ struct Crop {
 
 // MARK: - HomeScreenData Class
 class HomeScreenData {
-    var farmers: [Farmer]
+    var farmers: [Farmer1]
     var crops: [Crop]
     var mapImageUrl: String // This can be a placeholder URL or dynamically loaded
     
-    private init(farmers: [Farmer], crops: [Crop], mapImageUrl: String) {
+    private init(farmers: [Farmer1], crops: [Crop], mapImageUrl: String) {
         self.farmers = farmers
         self.crops = crops
         self.mapImageUrl = mapImageUrl
@@ -37,8 +37,8 @@ class HomeScreenData {
     // MARK: - Static Sample Data
     static func sampleData() -> HomeScreenData {
         let farmers = [
-            Farmer(id: 1, name: "John Smith", profileImageUrl: "farmer1.jpg", starRating: 4.5),
-            Farmer(id: 2, name: "Emily Brown", profileImageUrl: "farmer2.jpg", starRating: 4.7)
+            Farmer1(id: 1, name: "John Smith", profileImageUrl: "farmer1.jpg", starRating: 4.5),
+            Farmer1(id: 2, name: "Emily Brown", profileImageUrl: "farmer2.jpg", starRating: 4.7)
         ]
         
         let crops = [
