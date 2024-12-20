@@ -40,6 +40,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		431ADD322D154BE700F8D0DE /* Model */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DBC016682CFD66EB0020D94A /* AgriSmart_12 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -91,6 +96,7 @@
 				DBC016682CFD66EB0020D94A /* AgriSmart_12 */,
 				DBC0167F2CFD66EE0020D94A /* AgriSmart_12Tests */,
 				DBC016892CFD66EE0020D94A /* AgriSmart_12UITests */,
+				431ADD322D154BE700F8D0DE /* Model */,
 				DBC016672CFD66EB0020D94A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,6 +127,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				431ADD322D154BE700F8D0DE /* Model */,
 				DBC016682CFD66EB0020D94A /* AgriSmart_12 */,
 			);
 			name = AgriSmart_12;
