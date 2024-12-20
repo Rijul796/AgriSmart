@@ -26,18 +26,10 @@ struct Address {
     var contactNumber: String
 }
 
-// MARK: - PaymentOption Enum
-enum PaymentOption: String {
-    case creditCard = "Credit Card"
-    case upi = "UPI"
-    case cashOnDelivery = "Cash on Delivery"
-}
-
 // MARK: - Checkout Model
 final class Checkout {
     private(set) var orderItems: [OrderItem] = []
     private(set) var address: Address?
-    private(set) var paymentOption: PaymentOption?
     
     private init() {}
     static let shared = Checkout() // Singleton to avoid redeclaration
@@ -63,10 +55,7 @@ final class Checkout {
         )
     }
     
-    // Set the payment option
-    func setPaymentOption(_ option: PaymentOption) {
-        paymentOption = option
-    }
+
     
     // Calculate total price of the order
     func calculateTotalPrice() -> Double {
@@ -75,7 +64,7 @@ final class Checkout {
     
     // Confirm order
     func confirmOrder() -> Bool {
-        guard !orderItems.isEmpty, address != nil, paymentOption != nil else {
+        guard !orderItems.isEmpty, address != nil else {
             return false
         }
         print("Order Confirmed!")
