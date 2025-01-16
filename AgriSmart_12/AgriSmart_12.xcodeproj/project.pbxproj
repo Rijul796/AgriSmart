@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		43D6D8632D1D36810013ED2B /* tempFarmerProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D6D8622D1D36810013ED2B /* tempFarmerProfileCell.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		DBC0167D2CFD66EE0020D94A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -28,7 +24,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		43D6D8622D1D36810013ED2B /* tempFarmerProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tempFarmerProfileCell.swift; sourceTree = "<group>"; };
 		DBC016662CFD66EB0020D94A /* AgriSmart_12.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgriSmart_12.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBC0167C2CFD66EE0020D94A /* AgriSmart_12Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AgriSmart_12Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBC016862CFD66EE0020D94A /* AgriSmart_12UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AgriSmart_12UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,7 +88,6 @@
 		DBC0165D2CFD66EB0020D94A = {
 			isa = PBXGroup;
 			children = (
-				43D6D8622D1D36810013ED2B /* tempFarmerProfileCell.swift */,
 				DBC016682CFD66EB0020D94A /* AgriSmart_12 */,
 				DBC0167F2CFD66EE0020D94A /* AgriSmart_12Tests */,
 				DBC016892CFD66EE0020D94A /* AgriSmart_12UITests */,
@@ -255,7 +249,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43D6D8632D1D36810013ED2B /* tempFarmerProfileCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
