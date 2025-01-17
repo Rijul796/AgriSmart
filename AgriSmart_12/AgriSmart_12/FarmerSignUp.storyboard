@@ -105,7 +105,6 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Sign up"/>
                                 <connections>
                                     <action selector="signUpButtonTapped:" destination="kKm-IH-EUZ" eventType="touchUpInside" id="iY6-m4-vHo"/>
-                                    <action selector="signupbtnTapped:" destination="kKm-IH-EUZ" eventType="touchUpInside" id="tsg-p4-Ydf"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload farm image" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvz-3w-o5b">
