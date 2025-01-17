@@ -147,6 +147,35 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @objc private func logoutButtonTapped() {
-        print("Logout tapped")
+        // Create an alert controller
+        let alertController = UIAlertController(
+            title: "Logout",
+            message: "Are you sure you want to logout?",
+            preferredStyle: .alert
+        )
+        
+        // Add "Yes" action
+        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { _ in
+            // Navigate to the "Main" storyboard and "start" view controller
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let startViewController = mainStoryboard.instantiateViewController(withIdentifier: "start")
+            
+            // Set as root view controller
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+            sceneDelegate?.window?.rootViewController = startViewController
+            sceneDelegate?.window?.makeKeyAndVisible()
+        }
+        
+        // Add "No" action
+        let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        
+        // Add actions to the alert
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        
+        // Present the alert
+        self.present(alertController, animated: true, completion: nil)
     }
+
+
 }
