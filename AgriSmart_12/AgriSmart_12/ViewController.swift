@@ -33,3 +33,13 @@ class ViewController: UIViewController {
         self.present(targetViewController, animated: true, completion: nil)
     }
 }
+
+//@IBAction func signUpButtonTapped(_ sender: UIButton) {
+//    let storyboard = UIStoryboard(name: "Farmer", bundle: nil) // Replace "Main" with the storyboard name
+//    if let tabBarController = storyboard.instantiateViewController(withIdentifier: "farm") as? UITabBarController {
+//        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+//        sceneDelegate?.window?.rootViewController = tabBarController
+//        sceneDelegate?.window?.makeKeyAndVisible()
+//    }
+//}
+
