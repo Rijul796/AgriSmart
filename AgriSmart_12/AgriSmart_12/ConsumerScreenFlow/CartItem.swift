@@ -22,6 +22,6 @@ struct CartItem {
         self.details = product.description
         self.pricePerUnit = Int(product.pricePerKg)
         self.quantity = 1
-        self.imageName = product.imageUrls.first
+        self.imageName = product.imageNames.first
     }
 }

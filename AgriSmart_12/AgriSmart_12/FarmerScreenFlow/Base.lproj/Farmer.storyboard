@@ -798,7 +798,7 @@
         <!--Help Desk-->
         <scene sceneID="O25-g4-lgP">
             <objects>
-                <viewController id="wnL-J3-YwM" customClass="ConsumerHelpDeskViewController" customModule="AgriSmart_12" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wnL-J3-YwM" customClass="HelpDeskViewController" customModule="AgriSmart_12" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i5l-fD-DQL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -896,7 +896,7 @@
             <color red="0.3880000114440918" green="0.52899998426437378" blue="0.3880000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="quaternarySystemFillColor">
-            <color red="0.45490196078431372" green="0.45490196078431372" blue="0.50196078431372548" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4549019608" green="0.4549019608" blue="0.50196078430000002" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

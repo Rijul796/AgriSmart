@@ -22,8 +22,8 @@ class FarmerProductCell: UITableViewCell {
         } else {
             ratingLabel.text = "No ratings"
         }
-        if let imageUrl = product.imageUrls.first {
-            productImageView.image = UIImage(named: imageUrl)
+        if let imageName = product.imageNames.first { // Use imageNames property
+            productImageView.image = UIImage(named: imageName)
         } else {
             productImageView.image = UIImage(systemName: "leaf")
         }

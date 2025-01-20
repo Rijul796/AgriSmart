@@ -19,6 +19,6 @@ class ProductTableViewCell: UITableViewCell {
         productNameLabel.text = product.name
         productPriceLabel.text = product.formattedPrice
         productRatingLabel.text = "\(product.rating ?? 0.0) ★ (\(product.reviewsCount))"
-        productImageView.image = UIImage(named: product.imageUrls.first ?? "default_image") // Replace with actual image logic
+        productImageView.image = UIImage(named: product.imageNames.first ?? "default_image") // Replaced with imageNames property
     }
 }

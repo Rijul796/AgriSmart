@@ -24,9 +24,13 @@ class CartItemCell: UITableViewCell {
         priceLabel.text = "₹\(item.quantity * item.pricePerUnit)"
         quantityLabel.text = "\(item.quantity)"
         quantityStepper.value = Double(item.quantity)
+        if let imageName = item.imageName {
+            productImageView.image = UIImage(named: imageName)
+        } else {
+            productImageView.image = UIImage(systemName: "leaf")
+        }
         updateQuantity = onQuantityChange
     }
-    
     
     @IBAction func quantityChanged(_ sender: UIStepper) {
         let newQuantity = Int(sender.value)
@@ -34,4 +38,3 @@ class CartItemCell: UITableViewCell {
         updateQuantity?(newQuantity)
     }
 }
-

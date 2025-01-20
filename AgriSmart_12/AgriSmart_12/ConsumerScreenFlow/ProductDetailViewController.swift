@@ -35,7 +35,7 @@ class ProductDetailViewController: UIViewController {
     // MARK: - Setup Methods
     private func setupUI() {
         guard let product = product else { return }
-        productImageView.image = UIImage(named: product.imageUrls.first ?? "placeholder")
+        productImageView.image = UIImage(named: product.imageNames.first ?? "placeholder") // Use imageNames
         productNameLabel.text = product.name
         productPriceLabel.text = product.formattedPrice
         productRatingLabel.text = "Rating: \(product.rating ?? 0.0) (\(product.reviewsCount) reviews)"
@@ -57,17 +57,29 @@ class ProductDetailViewController: UIViewController {
     }
 
     @IBAction func addToCartTapped(_ sender: UIButton) {
-        isProductInCart = !isProductInCart
         if isProductInCart {
-            CartManager.shared.addProduct(product!)
+            navigateToCart()
         } else {
-            // Consider removing the condition, as you don't remove product from cart on second click
+            isProductInCart.toggle()
+            CartManager.shared.addProduct(product!)
+            updateAddToCartButton()
         }
-        updateAddToCartButton()
     }
 
     private func updateAddToCartButton() {
         addToCartButton.setTitle(isProductInCart ? "Go to Cart" : "Add to Cart", for: .normal)
+    }
+
+    private func navigateToCart() {
+        performSegue(withIdentifier: "showAddToCart", sender: self)
+    }
+
+    // Prepare for Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAddToCart",
+           let destinationVC = segue.destination as? AddToCartViewController {
+            destinationVC.cartItems = CartManager.shared.cartItems
+        }
     }
 }
 

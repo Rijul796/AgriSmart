@@ -1212,7 +1212,7 @@
         <!--Product Detail View Controller-->
         <scene sceneID="HlN-w8-P3i">
             <objects>
-                <viewController id="Ye5-7U-xei" customClass="ProductDetailViewController" customModule="AgriSmart_12" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductDetailViewController" id="Ye5-7U-xei" customClass="ProductDetailViewController" customModule="AgriSmart_12" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2ue-b9-ACT">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1281,7 +1281,6 @@
                                 <buttonConfiguration key="configuration" style="filled" title="+ Add to cart"/>
                                 <connections>
                                     <action selector="addToCartTapped:" destination="Ye5-7U-xei" eventType="touchUpInside" id="6Qo-us-MoY"/>
-                                    <segue destination="t3v-1e-Fy3" kind="show" identifier="showAddTocart" id="NvV-dO-gyS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2h-UY-Yhr">
@@ -1354,6 +1353,7 @@
                         <outlet property="quantityLabel" destination="lKw-No-rcg" id="08Y-Hr-tsc"/>
                         <outlet property="reviewsTableView" destination="EXS-Hd-j0G" id="hSh-H2-w4n"/>
                         <outlet property="stepper" destination="DsV-Z0-4lG" id="LUf-SY-XGX"/>
+                        <segue destination="t3v-1e-Fy3" kind="show" identifier="showAddToCart" id="eBg-et-OAD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="44h-xo-RDT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1608,8 +1608,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iAB-Gq-Zry"/>
-        <segue reference="NvV-dO-gyS"/>
+        <segue reference="HfV-gG-Q4O"/>
+        <segue reference="eBg-et-OAD"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image 5" width="804" height="716"/>

@@ -13,7 +13,7 @@ struct SampleData {
                 dateOfBirth: Date(),
                 countryRegion: "India",
                 joinedDate: Date().addingTimeInterval(-2 * 365 * 24 * 60 * 60),
-                profileImageUrl: nil,
+                profileImageUrl: "farm1", // Added image name
                 defaultAddress: Address(
                     fullName: "John Farmer",
                     addressLine1: "123 Greenfield Lane",
@@ -40,7 +40,7 @@ struct SampleData {
                 dateOfBirth: Date(),
                 countryRegion: "India",
                 joinedDate: Date().addingTimeInterval(-1 * 365 * 24 * 60 * 60),
-                profileImageUrl: nil,
+                profileImageUrl: "farm2", // Added image name
                 defaultAddress: Address(
                     fullName: "Alice Grower",
                     addressLine1: "456 Orchard Drive",
@@ -67,7 +67,7 @@ struct SampleData {
                 dateOfBirth: Date(),
                 countryRegion: "India",
                 joinedDate: Date().addingTimeInterval(-3 * 365 * 24 * 60 * 60),
-                profileImageUrl: nil,
+                profileImageUrl: "farm3", // Added image name
                 defaultAddress: Address(
                     fullName: "Raj Patel",
                     addressLine1: "789 Riverbend Road",
@@ -94,7 +94,7 @@ struct SampleData {
                 dateOfBirth: Date(),
                 countryRegion: "India",
                 joinedDate: Date().addingTimeInterval(-4 * 365 * 24 * 60 * 60),
-                profileImageUrl: nil,
+                profileImageUrl: "farm4", // Added image name
                 defaultAddress: Address(
                     fullName: "Meera Shah",
                     addressLine1: "101 Harvest Hills",
@@ -121,7 +121,7 @@ struct SampleData {
                 dateOfBirth: Date(),
                 countryRegion: "India",
                 joinedDate: Date().addingTimeInterval(-5 * 365 * 24 * 60 * 60),
-                profileImageUrl: nil,
+                profileImageUrl: "farm5", // Added image name
                 defaultAddress: Address(
                     fullName: "Amit Verma",
                     addressLine1: "222 Countryside View",
@@ -138,8 +138,8 @@ struct SampleData {
             metrics: UserMetrics(postCount: 10, commentCount: 8, isTopContributor: false, rating: 4.0, reviewCount: 12)
         )
     ]
-    
-    
+
+
     // Sample products for farmers
     static let products: [Product] = [
         Product(
@@ -218,7 +218,7 @@ struct SampleData {
             quantityAvailable: 20,
             originalQuantity: 20,
             description: "Spicy red chilies.",
-            imageNames: ["chili"], // Updated to use imageNames
+            imageNames: ["chilie"], // Updated to use imageNames
             imageUrls: [],
             status: .available,
             expiryDate: Date().addingTimeInterval(5 * 24 * 60 * 60),

@@ -15,7 +15,7 @@ class FarmerTableViewCell: UITableViewCell {
 
     func configure(with farmer: User) {
         self.farmer = farmer
-        if let imageUrl = farmer.profile.profileImageUrl, let image = UIImage(named: imageUrl) {
+        if let imageName = farmer.profile.profileImageUrl, let image = UIImage(named: imageName) {
             profileImageView.image = image
         } else {
             profileImageView.image = UIImage(named: "defaultProfileImage")
