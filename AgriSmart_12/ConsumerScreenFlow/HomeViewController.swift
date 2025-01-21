@@ -26,7 +26,15 @@ class HomeViewController: UIViewController {
     }
     
     private func setupNavigationBarIcons() {
-        // Notification button (left side)
+        // Cart button
+        let cartButton = UIBarButtonItem(
+            image: UIImage(systemName: "cart"), // SF Symbol for cart
+            style: .plain,
+            target: self,
+            action: #selector(cartButtonTapped)
+        )
+        
+        // Notification button
         let notificationButton = UIBarButtonItem(
             image: UIImage(systemName: "bell"), // SF Symbol for notification
             style: .plain,
@@ -34,20 +42,17 @@ class HomeViewController: UIViewController {
             action: #selector(notificationButtonTapped)
         )
         
-        // Cart button (right side)
-        let cartButton = UIBarButtonItem(
-            image: UIImage(systemName: "cart"), // SF Symbol for cart
-            style: .plain,
-            target: self,
-            action: #selector(cartButtonTapped)
-        )
+        // Custom spacer to control the gap between buttons and edge of the screen
+        let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        leftSpacer.width = 10 // Adjust the gap from the left edge for the cart button
+        
+        let rightSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        rightSpacer.width = 15 // Adjust the gap from the right edge for the notification button
 
-        // Add notification button to the left side of the navigation bar
-        navigationItem.leftBarButtonItem = notificationButton
-
-        // Add cart button to the right side of the navigation bar
-        navigationItem.rightBarButtonItem = cartButton
+        // Set the right bar button items in the correct order
+        navigationItem.rightBarButtonItems = [leftSpacer, cartButton, rightSpacer, notificationButton]
     }
+
     
     @objc private func notificationButtonTapped() {
         // Navigate to the notifications screen
@@ -126,9 +131,9 @@ class HomeViewController: UIViewController {
                 let selectedProduct = SampleData.products[indexPath.row]
                 destinationVC.product = selectedProduct
             }         else if segue.identifier == "showNotifications" {
-                let destinationVC = segue.destination as! NotificationViewController
+                _ = segue.destination as! NotificationViewController
             } else if segue.identifier == "showCart" {
-                let destinationVC = segue.destination as! AddToCartViewController
+                _ = segue.destination as! AddToCartViewController
             }
         }
 
