@@ -30,6 +30,9 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         configureTableView()
+        stepper.minimumValue = 1
+        stepper.value = 1
+        quantityLabel.text = "Quantity: 1 kg"
     }
 
     // MARK: - Setup Methods
