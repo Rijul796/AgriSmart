@@ -14,8 +14,6 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var productPriceLabel: UILabel!
     @IBOutlet weak var productRatingLabel: UILabel!
-    @IBOutlet weak var quantityLabel: UILabel!
-    @IBOutlet weak var stepper: UIStepper!
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var deliveryAvailabilityLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -30,9 +28,6 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         configureTableView()
-        stepper.minimumValue = 1
-        stepper.value = 1
-        quantityLabel.text = "Quantity: 1 kg"
     }
 
     // MARK: - Setup Methods
@@ -42,8 +37,6 @@ class ProductDetailViewController: UIViewController {
         productNameLabel.text = product.name
         productPriceLabel.text = product.formattedPrice
         productRatingLabel.text = "Rating: \(product.rating ?? 0.0) (\(product.reviewsCount) reviews)"
-        quantityLabel.text = "Quantity: \(Int(stepper.value)) kg"
-        descriptionLabel.text = product.description
         deliveryAvailabilityLabel.text = "Yes Available!"
         updateAddToCartButton()
     }
@@ -52,11 +45,6 @@ class ProductDetailViewController: UIViewController {
         reviewsTableView.delegate = self
         reviewsTableView.dataSource = self
         reviewsTableView.register(UITableViewCell.self, forCellReuseIdentifier: "ReviewCell")
-    }
-
-    // MARK: - Actions
-    @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        quantityLabel.text = "Quantity: \(Int(sender.value)) kg"
     }
 
     @IBAction func addToCartTapped(_ sender: UIButton) {

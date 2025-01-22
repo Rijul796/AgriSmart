@@ -1,9 +1,3 @@
-//
-//  consumerSignupViewController.swift
-//  AgriSmart_12
-//
-//  Created by Rohan Jain on 18/01/25.
-//
 import UIKit
 
 class consumerSignupViewController: UIViewController {
@@ -14,12 +8,12 @@ class consumerSignupViewController: UIViewController {
     @IBOutlet weak var firmAddressTextField: UITextField!
     @IBOutlet weak var firmNameTextField: UITextField!
     @IBOutlet weak var regionCityTextField: UITextField!
-    
-    // Temporary storage for user data
-    var userDatabase: [[String: String]] = []
+    @IBOutlet weak var profileImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        profileImageView.backgroundColor = UIColor.gray
+        setupProfileImageView()
     }
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
@@ -27,53 +21,33 @@ class consumerSignupViewController: UIViewController {
         guard let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !name.isEmpty,
               let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !email.isEmpty,
               let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !password.isEmpty,
-              let confirmPassword = confirmPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !confirmPassword.isEmpty,
-              let firmAddress = firmAddressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !firmAddress.isEmpty,
-              let firmName = firmNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !firmName.isEmpty,
-              let regionCity = regionCityTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !regionCity.isEmpty else {
-            showAlert(title: "Error", message: "Please fill in all fields.")
+              let confirmPassword = confirmPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !confirmPassword.isEmpty else {
+            showAlert(title: "Error", message: "Please fill in all required fields.")
             return
         }
         
-        // Check if passwords match
         if password != confirmPassword {
             showAlert(title: "Error", message: "Passwords do not match.")
             return
         }
         
-        // Validate email format
         if !isValidEmail(email) {
             showAlert(title: "Error", message: "Please enter a valid email address.")
             return
         }
-        
-        // Check for existing user
         if UserDefaults.standard.dictionary(forKey: email) != nil {
-            showAlert(title: "Error", message: "An account with this email already exists.")
-            return
-        }
+                showAlert(title: "Error", message: "An account with this email already exists.")
+                return
+            }
         
         // Save user data to UserDefaults
-        let userData: [String: String] = [
-            "name": name,
-            "email": email,
-            "password": password,
-            "firmAddress": firmAddress,
-            "firmName": firmName,
-            "regionCity": regionCity
-        ]
-        UserDefaults.standard.set(userData, forKey: email)
-        UserDefaults.standard.set(userData, forKey: name)
-        UserDefaults.standard.set(email, forKey: "userName")
-
-
+        if let imageData = profileImageView.image?.pngData() {
+            UserDefaults.standard.set(imageData, forKey: "userProfileImage")
+        }
+        UserDefaults.standard.set(name, forKey: "userName")
         
-        // Save the email to UserDefaults for easier retrieval during login
-        UserDefaults.standard.set(email, forKey: "userEmail")
-        
-        // Display success alert and navigate to the home screen
         showAlert(title: "Success", message: "Signup successful!") { [weak self] in
-            guard self != nil else { return }
+            guard let self = self else { return }
             let storyboard = UIStoryboard(name: "Consumer", bundle: nil)
             if let tabBarController = storyboard.instantiateViewController(withIdentifier: "consum") as? UITabBarController {
                 let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
@@ -83,9 +57,21 @@ class consumerSignupViewController: UIViewController {
         }
     }
     
-    // MARK: - Helper Methods
+    private func setupProfileImageView() {
+        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+        profileImageView.layer.masksToBounds = true
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectProfileImage)))
+    }
     
-    // Function to show alerts
+    @objc private func selectProfileImage() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        present(picker, animated: true, completion: nil)
+    }
+    
     private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
@@ -94,11 +80,19 @@ class consumerSignupViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    // Function to validate email format
     private func isValidEmail(_ email: String) -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        
-        return emailPredicate.evaluate(with: email)
+        let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: email)
+    }
+}
+
+extension consumerSignupViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let editedImage = info[.editedImage] as? UIImage {
+            profileImageView.image = editedImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            profileImageView.image = originalImage
+        }
+        dismiss(animated: true, completion: nil)
     }
 }

@@ -1,14 +1,6 @@
-//
-//  ConsumerSettingsViewController.swift
-//  AgriSmart_12
-//
-//  Created by student-2 on 18/01/25.
-//
-
 import UIKit
 
 class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    // Copy the same logic here or make necessary changes specific to the consumer's settings screen.
     @IBOutlet weak var tableView: UITableView!
     
     let sections = ["Account Settings", "More"]
@@ -49,39 +41,17 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
         
         if indexPath.section == 0 {
             cell.textLabel?.text = accountSettings[indexPath.row]
-            
-            // Add switches for toggle items
             if indexPath.row == 2 || indexPath.row == 3 {
                 let toggleSwitch = UISwitch()
-                toggleSwitch.isOn = indexPath.row == 2 // Push notifications default ON
+                toggleSwitch.isOn = indexPath.row == 2
                 toggleSwitch.addTarget(self, action: #selector(switchToggled(_:)), for: .valueChanged)
-                toggleSwitch.tag = indexPath.row // Identify which switch
+                toggleSwitch.tag = indexPath.row
                 cell.accessoryView = toggleSwitch
             }
         } else {
             cell.textLabel?.text = moreOptions[indexPath.row]
         }
-        
         return cell
-    }
-    
-    // MARK: - TableView Delegate Methods
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.section == 1, indexPath.row == 3 {
-            performSegue(withIdentifier: "HelpDesk", sender: self)
-        }
-    }
-    
-    
-    @IBSegueAction func goToHelpDesk(_ coder: NSCoder) -> HelpDeskViewController? {
-        return HelpDeskViewController(coder: coder)
     }
     
     // MARK: - Switch Actions
@@ -100,24 +70,34 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 150))
         headerView.backgroundColor = .white
         
+        // Profile Image View
         let profileImageView = UIImageView(frame: CGRect(x: (view.frame.width - 80) / 2, y: 20, width: 80, height: 80))
-        profileImageView.image = UIImage(systemName: "person.circle")
         profileImageView.contentMode = .scaleAspectFill
         profileImageView.layer.cornerRadius = 40
         profileImageView.layer.masksToBounds = true
-        profileImageView.tintColor = .gray
         
+        // Load the profile image from UserDefaults
+        if let imageData = UserDefaults.standard.data(forKey: "userProfileImage"), let image = UIImage(data: imageData) {
+            profileImageView.image = image
+        } else {
+            // Fallback to default system image if no image is saved
+            profileImageView.image = UIImage(systemName: "person.circle")
+        }
+        
+        profileImageView.tintColor = nil
+        
+        // Name Label
         let nameLabel = UILabel(frame: CGRect(x: 20, y: 110, width: view.frame.width - 40, height: 20))
-        nameLabel.text = "John Doe"
+        nameLabel.text = UserDefaults.standard.string(forKey: "userName") ?? "John Doe"
         nameLabel.textAlignment = .center
         nameLabel.font = UIFont.boldSystemFont(ofSize: 18)
         nameLabel.textColor = .label
         
+        // Add profile image and name label to the header view
         headerView.addSubview(profileImageView)
         headerView.addSubview(nameLabel)
         
         tableView.tableHeaderView = headerView
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
     }
     
     // MARK: - Footer with Logout Button
@@ -147,34 +127,21 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     @objc private func logoutButtonTapped() {
-        // Create an alert controller
         let alertController = UIAlertController(
             title: "Logout",
             message: "Are you sure you want to logout?",
             preferredStyle: .alert
         )
-        
-        // Add "Yes" action
         let yesAction = UIAlertAction(title: "Yes", style: .destructive) { _ in
-            // Navigate to the "Main" storyboard and "start" view controller
             let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let startViewController = mainStoryboard.instantiateViewController(withIdentifier: "start")
-            
-            // Set as root view controller
             let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
             sceneDelegate?.window?.rootViewController = startViewController
             sceneDelegate?.window?.makeKeyAndVisible()
         }
-        
-        // Add "No" action
         let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
-        
-        // Add actions to the alert
         alertController.addAction(yesAction)
         alertController.addAction(noAction)
-        
-        // Present the alert
         self.present(alertController, animated: true, completion: nil)
     }
-
 }
