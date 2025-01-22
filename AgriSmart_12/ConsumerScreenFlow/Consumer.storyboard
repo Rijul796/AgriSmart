@@ -868,6 +868,7 @@
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" editable="NO" text="product name and price" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jb7-iN-LUr">
                                 <rect key="frame" x="0.0" y="140" width="391" height="89"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -992,24 +993,13 @@
                         <viewLayoutGuide key="safeArea" id="npp-vX-98h"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8ra-IP-VJT" firstAttribute="top" secondItem="voD-eW-jyk" secondAttribute="bottom" constant="7.6666666666666572" id="0j7-pQ-KB4"/>
-                            <constraint firstItem="8ra-IP-VJT" firstAttribute="bottom" secondItem="npp-vX-98h" secondAttribute="bottom" id="1SN-iW-kdn"/>
-                            <constraint firstItem="0KL-eF-vdg" firstAttribute="centerY" secondItem="voD-eW-jyk" secondAttribute="centerY" id="1ZI-Ce-NE8"/>
-                            <constraint firstItem="0KL-eF-vdg" firstAttribute="leading" secondItem="npp-vX-98h" secondAttribute="leading" constant="16" id="2cL-hz-JTi"/>
-                            <constraint firstItem="kJu-VV-lME" firstAttribute="top" secondItem="Jxz-s3-2TH" secondAttribute="topMargin" constant="-3" id="2or-Wf-1qj"/>
-                            <constraint firstItem="voD-eW-jyk" firstAttribute="trailing" secondItem="Jxz-s3-2TH" secondAttribute="trailingMargin" id="82q-DH-SB0"/>
-                            <constraint firstItem="8ra-IP-VJT" firstAttribute="leading" secondItem="jb7-iN-LUr" secondAttribute="leading" id="Ann-Xo-5Ic"/>
-                            <constraint firstItem="kJu-VV-lME" firstAttribute="trailing" secondItem="jb7-iN-LUr" secondAttribute="trailing" id="BP0-IG-6am"/>
-                            <constraint firstItem="jb7-iN-LUr" firstAttribute="leading" secondItem="Jxz-s3-2TH" secondAttribute="leading" id="HuB-pC-BJY"/>
-                            <constraint firstItem="voD-eW-jyk" firstAttribute="top" secondItem="jb7-iN-LUr" secondAttribute="bottom" constant="8" symbolic="YES" id="Idg-eE-Nmk"/>
-                            <constraint firstItem="npp-vX-98h" firstAttribute="trailing" secondItem="8ra-IP-VJT" secondAttribute="trailing" id="InM-Dn-0AV"/>
-                            <constraint firstItem="0KL-eF-vdg" firstAttribute="top" secondItem="jb7-iN-LUr" secondAttribute="bottom" constant="15" id="NJ3-lb-eGE"/>
-                            <constraint firstItem="voD-eW-jyk" firstAttribute="top" secondItem="kJu-VV-lME" secondAttribute="bottom" constant="84" id="QU2-2l-7dz"/>
-                            <constraint firstItem="8ra-IP-VJT" firstAttribute="leading" secondItem="Jxz-s3-2TH" secondAttribute="leading" id="Sf7-b8-bRP"/>
-                            <constraint firstItem="8ra-IP-VJT" firstAttribute="trailing" secondItem="jb7-iN-LUr" secondAttribute="trailing" id="UiE-hu-0s4"/>
-                            <constraint firstItem="jb7-iN-LUr" firstAttribute="top" secondItem="npp-vX-98h" secondAttribute="top" constant="37" id="sqW-QL-44I"/>
-                            <constraint firstItem="npp-vX-98h" firstAttribute="trailing" secondItem="kJu-VV-lME" secondAttribute="trailing" constant="2" id="yTX-0g-odn"/>
-                            <constraint firstItem="kJu-VV-lME" firstAttribute="leading" secondItem="npp-vX-98h" secondAttribute="leading" constant="6" id="yzx-2Q-XQP"/>
+                            <constraint firstItem="voD-eW-jyk" firstAttribute="leading" secondItem="0KL-eF-vdg" secondAttribute="trailing" constant="58.333333333333314" id="5dO-nk-FgS"/>
+                            <constraint firstItem="voD-eW-jyk" firstAttribute="baseline" secondItem="0KL-eF-vdg" secondAttribute="firstBaseline" id="6GU-5K-Aiq"/>
+                            <constraint firstItem="voD-eW-jyk" firstAttribute="trailing" secondItem="Jxz-s3-2TH" secondAttribute="trailingMargin" id="BOO-Im-LX6"/>
+                            <constraint firstItem="8ra-IP-VJT" firstAttribute="top" secondItem="voD-eW-jyk" secondAttribute="bottom" constant="7.6666666666666572" id="XTx-b9-gUR"/>
+                            <constraint firstItem="8ra-IP-VJT" firstAttribute="centerX" secondItem="Jxz-s3-2TH" secondAttribute="centerX" id="Xh5-dt-HVP"/>
+                            <constraint firstItem="8ra-IP-VJT" firstAttribute="leading" secondItem="npp-vX-98h" secondAttribute="leading" id="fEM-Wc-krK"/>
+                            <constraint firstItem="8ra-IP-VJT" firstAttribute="bottom" secondItem="npp-vX-98h" secondAttribute="bottom" id="j1p-Dp-elz"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -1906,8 +1896,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="i9w-mG-5NW"/>
-        <segue reference="2RO-gN-zfT"/>
+        <segue reference="iAB-Gq-Zry"/>
+        <segue reference="vzE-NC-LfK"/>
         <segue reference="d4I-4Z-JRk"/>
     </inferredMetricsTieBreakers>
     <resources>

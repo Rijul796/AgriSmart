@@ -45,7 +45,7 @@ class consumerSignupViewController: UIViewController {
         
         // Show success message and navigate
         showAlert(title: "Success", message: "Signup successful!") { [weak self] in
-            guard let self = self else { return }
+            guard self != nil else { return }
             let storyboard = UIStoryboard(name: "Consumer", bundle: nil)
             if let tabBarController = storyboard.instantiateViewController(withIdentifier: "consum") as? UITabBarController {
                 let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
