@@ -1,28 +1,11 @@
-//
-//  ProductTableViewController.swift
-//  AgriSmart_12
-//
-//  Created by Rohan Jain on 23/12/24.
-//
-
 import UIKit
 
 class ProductTableViewController: UITableViewController {
-
-    // MARK: - Properties
     var products: [Product] = SampleData.products
-    
-    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Register Cell
-        // tableView.register(UINib(nibName: "ProductTableViewCell", bundle: nil), forCellReuseIdentifier: "ProductCell")
-        
-        // Set Navigation Title
         self.title = "Explore"
     }
-
-    // MARK: - TableView DataSource Methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return products.count
     }
@@ -42,7 +25,6 @@ class ProductTableViewController: UITableViewController {
         return cell
     }
 
-    // MARK: - TableView Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
@@ -50,7 +32,6 @@ class ProductTableViewController: UITableViewController {
         performSegue(withIdentifier: "showProductDetail", sender: selectedProduct)
     }
 
-    // MARK: - Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showProductDetail",
            let destinationVC = segue.destination as? ProductDetailViewController,
@@ -62,14 +43,12 @@ class ProductTableViewController: UITableViewController {
         }
     }
 
-    // MARK: - Add to Cart Action
     @objc func addToCartButtonTapped(_ sender: UIButton) {
         let selectedProduct = products[sender.tag]
         if CartManager.shared.isProductInCart(selectedProduct.id) {
             // Change button to "Go to Cart"
             performSegue(withIdentifier: "showAddToCart", sender: nil)
         } else {
-            // Add to Cart
             CartManager.shared.addProduct(selectedProduct)
             sender.setTitle("Go to Cart", for: .normal)
         }

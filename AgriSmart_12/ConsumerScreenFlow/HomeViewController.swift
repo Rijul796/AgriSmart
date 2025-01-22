@@ -44,10 +44,10 @@ class HomeViewController: UIViewController {
         
         // Custom spacer to control the gap between buttons and edge of the screen
         let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        leftSpacer.width = 10 // Adjust the gap from the left edge for the cart button
+        leftSpacer.width = 5 // Adjust the gap from the left edge for the cart button
         
         let rightSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        rightSpacer.width = 15 // Adjust the gap from the right edge for the notification button
+        rightSpacer.width = 5 // Adjust the gap from the right edge for the notification button
 
         // Set the right bar button items in the correct order
         navigationItem.rightBarButtonItems = [leftSpacer, cartButton, rightSpacer, notificationButton]

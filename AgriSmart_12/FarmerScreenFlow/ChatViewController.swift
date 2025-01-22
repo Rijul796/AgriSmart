@@ -32,19 +32,21 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let chat = chats[indexPath.row]
+        // Trigger segue to SubChat view
+        performSegue(withIdentifier: "subChat", sender: indexPath)
+    }
 
-        // Instantiate SubChatViewController using Storyboard ID
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let subChatVC = storyboard.instantiateViewController(withIdentifier: "SubChatViewController") as? SubChatViewController {
-            // Pass data to SubChatViewController
-            subChatVC.username = chat.username
-            subChatVC.imageName = chat.imageName
-
-            // Navigate to SubChatViewController
-            navigationController?.pushViewController(subChatVC, animated: true)
+    // Prepare data before the segue is performed
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "subChat", let indexPath = sender as? IndexPath {
+            // Pass data to the DetailChatViewController
+            let subChatVC = segue.destination as! DetailChatViewController
+            let chat = chats[indexPath.row]
+            subChatVC.userName = chat.username  // Pass the user name
+            subChatVC.userImage = UIImage(named: chat.imageName)  // Pass the user image
         }
     }
+
 
     // Add swipe-to-delete functionality
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -57,4 +59,3 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
 }
-

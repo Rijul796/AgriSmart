@@ -17,35 +17,33 @@ class consumerSignupViewController: UIViewController {
     }
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
-        // Validate input fields
         guard let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !name.isEmpty,
-              let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !email.isEmpty,
+              let emailText = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !emailText.isEmpty,
               let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !password.isEmpty,
               let confirmPassword = confirmPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !confirmPassword.isEmpty else {
             showAlert(title: "Error", message: "Please fill in all required fields.")
             return
         }
-        
+
+        if !isValidEmail(emailText) {
+            showAlert(title: "Error", message: "Invalid email address.")
+            return
+        }
+
         if password != confirmPassword {
             showAlert(title: "Error", message: "Passwords do not match.")
             return
         }
-        
-        if !isValidEmail(email) {
-            showAlert(title: "Error", message: "Please enter a valid email address.")
+
+        if isEmailRegistered(emailText) {
+            showAlert(title: "Error", message: "Email is already registered.")
             return
         }
-        if UserDefaults.standard.dictionary(forKey: email) != nil {
-                showAlert(title: "Error", message: "An account with this email already exists.")
-                return
-            }
+
+        // Save user details in UserDefaults
+        saveUserDetails(name: name, email: emailText, password: password, image: profileImageView.image)
         
-        // Save user data to UserDefaults
-        if let imageData = profileImageView.image?.pngData() {
-            UserDefaults.standard.set(imageData, forKey: "userProfileImage")
-        }
-        UserDefaults.standard.set(name, forKey: "userName")
-        
+        // Show success message and navigate
         showAlert(title: "Success", message: "Signup successful!") { [weak self] in
             guard let self = self else { return }
             let storyboard = UIStoryboard(name: "Consumer", bundle: nil)
@@ -56,7 +54,7 @@ class consumerSignupViewController: UIViewController {
             }
         }
     }
-    
+
     private func setupProfileImageView() {
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         profileImageView.layer.masksToBounds = true
@@ -71,7 +69,32 @@ class consumerSignupViewController: UIViewController {
         picker.allowsEditing = true
         present(picker, animated: true, completion: nil)
     }
-    
+
+    private func saveUserDetails(name: String, email: String, password: String, image: UIImage?) {
+        let userDict = createUserDetailsDict(name: name, email: email, password: password, image: image)
+        UserDefaults.standard.set([userDict], forKey: "users")
+        UserDefaults.standard.synchronize()
+    }
+
+    private func createUserDetailsDict(name: String, email: String, password: String, image: UIImage?) -> [String: Data] {
+        var userDict: [String: Data] = [
+            "name": Data(name.utf8),
+            "email": Data(email.utf8),
+            "password": Data(password.utf8)
+        ]
+        if let image = image, let imageData = image.jpegData(compressionQuality: 0.8) {
+            userDict["image"] = imageData
+        }
+        return userDict
+    }
+
+    private func isEmailRegistered(_ email: String) -> Bool {
+        if let users = UserDefaults.standard.array(forKey: "users") as? [[String: Data]] {
+            return users.contains { $0["email"] == Data(email.utf8) }
+        }
+        return false
+    }
+
     private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
@@ -79,7 +102,7 @@ class consumerSignupViewController: UIViewController {
         })
         present(alert, animated: true, completion: nil)
     }
-    
+
     private func isValidEmail(_ email: String) -> Bool {
         let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: email)

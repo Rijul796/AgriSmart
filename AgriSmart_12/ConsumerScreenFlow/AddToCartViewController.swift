@@ -17,7 +17,7 @@ class AddToCartViewController: UIViewController, UITableViewDataSource, UITableV
         // Set up TableView
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 100 // Set the row height you desire (in points)
+        tableView.rowHeight = 120 // Set the row height you desire (in points)
         
         // Load cart items from CartManager
         cartItems = CartManager.shared.cartItems
