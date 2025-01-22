@@ -4,15 +4,6 @@
 //
 //  Created by Rijul Sharma on 22/01/25.
 //
-
-
-//
-//  ChatMessageCell.swift
-//  AgriSmart_12
-//
-//  Created by Chetan Puri on 22/01/25.
-//
-
 import UIKit
 
 class ChatMessageCell: UITableViewCell {

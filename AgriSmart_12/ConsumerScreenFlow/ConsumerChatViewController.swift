@@ -28,7 +28,7 @@ class ConsumerChatViewController: UIViewController, UITableViewDataSource, UITab
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ConsumerChatCell", for: indexPath) as! ConsumerChatCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConsumerChatCell", for: indexPath) as! ConsumerChatMessageCell
         let chat = chats[indexPath.row]
         cell.usernameLabel.text = chat.username
         cell.messageLabel.text = chat.message
