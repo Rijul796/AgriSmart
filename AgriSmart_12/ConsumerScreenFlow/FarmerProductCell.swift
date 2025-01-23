@@ -17,15 +17,18 @@ class FarmerProductCell: UITableViewCell {
     func configure(with product: Product) {
         nameLabel.text = product.name
         priceLabel.text = product.formattedPrice
+        
         if let rating = product.rating {
             ratingLabel.text = "⭐ \(rating) (\(product.reviewsCount))"
         } else {
             ratingLabel.text = "No ratings"
         }
-        if let imageName = product.imageNames.first { // Use imageNames property
-            productImageView.image = UIImage(named: imageName)
+
+        if let imageName = product.imageNames.first, let image = UIImage(named: imageName) {
+            productImageView.image = image
         } else {
             productImageView.image = UIImage(systemName: "leaf")
         }
     }
+
 }

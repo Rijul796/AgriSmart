@@ -29,8 +29,9 @@ class FarmerTableViewController: UITableViewController, FarmerTableViewCellDeleg
         let selectedFarmer = farmers[indexPath.row]
         performSegue(withIdentifier: "showFarmerDetail", sender: selectedFarmer)
     }
-
-
+    func viewProfileButtonTapped(farmer: User) {
+        performSegue(withIdentifier: "showFarmerDetail", sender: self)
+       }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFarmerDetail",
            let destinationVC = segue.destination as? FarmerProfileViewController,
@@ -40,9 +41,4 @@ class FarmerTableViewController: UITableViewController, FarmerTableViewCellDeleg
         }
     }
 
-
-    // FarmerTableViewCellDelegate method
-    func viewProfileButtonTapped(farmer: User) { 
-        performSegue(withIdentifier: "showFarmerDetail", sender: farmer)
-    }
 }

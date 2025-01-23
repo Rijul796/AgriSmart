@@ -17,52 +17,36 @@ class AddToCartViewController: UIViewController, UITableViewDataSource, UITableV
         // Set up TableView
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 120 // Set the row height you desire (in points)
-        
-        // Load cart items from CartManager
+        tableView.rowHeight = 120
         cartItems = CartManager.shared.cartItems
-        
-        // Update Total and Summary
         updateTotal()
         updateSummary()
-        
-        // Add Order History Button to the navigation bar
         let orderHistoryButton = UIBarButtonItem(title: "Order History", style: .plain, target: self, action: #selector(viewOrderHistory))
         navigationItem.rightBarButtonItem = orderHistoryButton
     }
-    
-    // Action for Order History Button
+     
     @objc func viewOrderHistory() {
-        // Navigate to Order History screen
         performSegue(withIdentifier: "showOrderHistory", sender: nil)
     }
-    
-    // Prepare for Segue to Order History
+     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showOrderHistory" {
             if let destinationVC = segue.destination as? OrderHistoryViewController {
-                // Fetch order history and pass to the Order History View Controller
                 destinationVC.orderHistory = fetchOrderHistory() ?? []
             }
         }
-        
-        // Prepare for Segue to Checkout
+         
         if segue.identifier == "showCheckout",
            let destinationVC = segue.destination as? CheckoutViewController {
             destinationVC.cartItems = cartItems
         }
     }
-
-    // Update Total Calculation
+ 
     func updateTotal() {
         let total = cartItems.reduce(0) { $0 + ($1.pricePerUnit * $1.quantity) }
         totalLabel.text = "Total: ₹\(total)"
-        
-        // Disable Checkout button if total is zero
         disableCheckoutButtonIfNeeded(total: Double(total))
     }
-    
-    // Update Cart Summary (Show item names and their individual prices)
     func updateSummary() {
         var summaryText = ""
 
@@ -70,23 +54,21 @@ class AddToCartViewController: UIViewController, UITableViewDataSource, UITableV
             let itemTotal = item.pricePerUnit * item.quantity
             summaryText += "\(item.name): ₹\(itemTotal)\n"
         }
-        
-        // Display the summary in the TextView
+         
         summaryTextView.text = summaryText
     }
-    
-    // Disable Checkout Button if total is 0
+     
     func disableCheckoutButtonIfNeeded(total: Double) {
         if total > 0 {
             checkoutButton.isEnabled = true
-            checkoutButton.backgroundColor = UIColor.systemBlue  // Reset to normal color
+            checkoutButton.tintColor = UIColor(red: 64/255, green: 43/255, blue: 41/255, alpha: 1.0)
         } else {
             checkoutButton.isEnabled = false
-            checkoutButton.backgroundColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0) // Disabled color (128, 128, 128)
+            checkoutButton.backgroundColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1.0)
         }
+        checkoutButton.layer.cornerRadius = 8  
+        checkoutButton.layer.masksToBounds = true
     }
-    
-    // TableView DataSource Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cartItems.count
     }
@@ -98,14 +80,13 @@ class AddToCartViewController: UIViewController, UITableViewDataSource, UITableV
         cell.configure(with: item) { [weak self] newQuantity in
             guard let self = self else { return }
             self.cartItems[indexPath.row].quantity = newQuantity
-            self.updateTotal()  // Update total after quantity change
-            self.updateSummary()  // Update the summary after quantity change
+            self.updateTotal()
+            self.updateSummary()
         }
         
         return cell
     }
-    
-    // TableView Delegate Methods (Optional: Delete an Item)
+     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             cartItems.remove(at: indexPath.row)
@@ -114,15 +95,12 @@ class AddToCartViewController: UIViewController, UITableViewDataSource, UITableV
             updateSummary()  // Update the summary after item deletion
         }
     }
-    
-    // Fetch Order History from UserDefaults
+     
     func fetchOrderHistory() -> [OrderHistory]? {
         let decoder = JSONDecoder()
-        
-        // Retrieve data from UserDefaults
+         
         if let data = UserDefaults.standard.data(forKey: "orderHistory") {
             do {
-                // Decode the data into an array of OrderHistory objects
                 let orderHistory = try decoder.decode([OrderHistory].self, from: data)
                 return orderHistory
             } catch {
@@ -131,8 +109,7 @@ class AddToCartViewController: UIViewController, UITableViewDataSource, UITableV
         }
         return nil
     }
-
-    // Proceed to Checkout Button Action
+ 
     @IBAction func proceedToCheckout(_ sender: UIButton) {
         performSegue(withIdentifier: "showCheckout", sender: nil)
     }

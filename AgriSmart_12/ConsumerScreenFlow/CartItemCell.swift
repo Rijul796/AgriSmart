@@ -19,6 +19,7 @@ class CartItemCell: UITableViewCell {
     private var updateQuantity: ((Int) -> Void)?
     
     func configure(with item: CartItem, onQuantityChange: @escaping (Int) -> Void) {
+        
         nameLabel.text = item.name
         detailsLabel.text = item.details
         priceLabel.text = "₹\(item.quantity * item.pricePerUnit)"
