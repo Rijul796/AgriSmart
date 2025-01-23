@@ -452,26 +452,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="exploreCell" id="1sZ-IT-7iS">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1sZ-IT-7iS" id="7xg-9b-vtN">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s9Y-Yx-shu">
-                                            <rect key="frame" x="0.0" y="-1" width="393" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="4iX-ph-RmN" id="FzL-r6-qc7"/>
-                                            </connections>
-                                        </searchBar>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductCell" rowHeight="184" id="YEU-qQ-bIn" customClass="ProductTableViewCell" customModule="AgriSmart_12" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="93.666667938232422" width="393" height="184"/>
+                                <rect key="frame" x="0.0" y="50" width="393" height="184"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="Items" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YEU-qQ-bIn" id="RxC-ow-Yuz">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="184"/>
@@ -980,7 +962,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nKe-jD-GPR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="933.58778625954199" y="1818.3098591549297"/>
+            <point key="canvasLocation" x="636" y="1837"/>
         </scene>
         <!--CheckOut-->
         <scene sceneID="m47-WI-qxa">
@@ -1552,7 +1534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4zv-SF-LHO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1985" y="758"/>
+            <point key="canvasLocation" x="1685" y="896"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8Hn-I8-VNK">
@@ -1652,7 +1634,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRV-MZ-Phg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3172" y="956"/>
+            <point key="canvasLocation" x="3171.7557251908397" y="955.63380281690149"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="g5H-ZW-cfh">
@@ -1736,7 +1718,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tgc-HE-im8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1983.9694656488548" y="1519.7183098591549"/>
+            <point key="canvasLocation" x="1685" y="1751"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iaG-gJ-ESj">
@@ -1852,7 +1834,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUF-pn-Ru3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4390" y="956"/>
+            <point key="canvasLocation" x="3172" y="1751"/>
         </scene>
         <!--NewChat-->
         <scene sceneID="qQq-VB-ehA">
@@ -1965,8 +1947,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="HfV-gG-Q4O"/>
-        <segue reference="eBg-et-OAD"/>
+        <segue reference="iAB-Gq-Zry"/>
+        <segue reference="vzE-NC-LfK"/>
         <segue reference="nXh-uw-bRh"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1991,7 +1973,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
