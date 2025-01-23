@@ -35,6 +35,10 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == 0 ? accountSettings.count : moreOptions.count
@@ -132,7 +136,7 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
         
         NSLayoutConstraint.activate([
             logoutButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
-            logoutButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
+            logoutButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor, constant: -25),
             logoutButton.widthAnchor.constraint(equalTo: footerView.widthAnchor, multiplier: 0.3), // Adjusted width
             logoutButton.heightAnchor.constraint(equalToConstant: 44) // Standard height for buttons
         ])
