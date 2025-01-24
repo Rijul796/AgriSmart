@@ -35,7 +35,7 @@ class FarmerTableViewCell: UITableViewCell {
 
         // Configure labels
         nameLabel.text = farmer.profile.name
-        distanceLabel.text = "Distance not available" // Update logic if distance is available
+        distanceLabel.text = "Distance: 9.99 KM" // Update logic if distance is available
         ratingLabel.text = "\(farmer.metrics.rating) ⭐️"
 
         // Clean previous targets and add action for button
