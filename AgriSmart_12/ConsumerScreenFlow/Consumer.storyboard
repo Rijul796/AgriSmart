@@ -624,7 +624,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" fixedFrame="YES" text="name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vP-zn-jjp">
                                 <rect key="frame" x="148" y="126.99999999999999" width="194" height="20.333333333333329"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1286,10 +1286,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="apple_image_url" translatesAutoresizingMaskIntoConstraints="NO" id="z2x-NV-QC6">
-                                <rect key="frame" x="29" y="137" width="143" height="144"/>
+                                <rect key="frame" x="29" y="137" width="157" height="144"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="144" id="XVl-9Y-Avs"/>
-                                    <constraint firstAttribute="width" constant="143" id="kVS-Xo-5Ch"/>
+                                    <constraint firstAttribute="width" constant="157" id="kVS-Xo-5Ch"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsZ-zM-4RC">
@@ -1379,8 +1379,8 @@
                             <constraint firstItem="EXS-Hd-j0G" firstAttribute="leading" secondItem="2ue-b9-ACT" secondAttribute="leading" id="NTV-Rw-xLV"/>
                             <constraint firstItem="EXS-Hd-j0G" firstAttribute="top" secondItem="sTq-B2-JXv" secondAttribute="bottom" constant="7.6666666666666856" id="RiQ-eS-je0"/>
                             <constraint firstItem="lxs-6T-jNJ" firstAttribute="bottom" secondItem="z2x-NV-QC6" secondAttribute="bottom" id="W0T-IC-vyA"/>
-                            <constraint firstItem="nsZ-zM-4RC" firstAttribute="leading" secondItem="z2x-NV-QC6" secondAttribute="trailing" constant="22" id="XrP-VK-ScQ"/>
-                            <constraint firstItem="lxs-6T-jNJ" firstAttribute="leading" secondItem="z2x-NV-QC6" secondAttribute="trailing" constant="52" id="avw-6Z-HU1"/>
+                            <constraint firstItem="nsZ-zM-4RC" firstAttribute="leading" secondItem="z2x-NV-QC6" secondAttribute="trailing" constant="8" id="XrP-VK-ScQ"/>
+                            <constraint firstItem="lxs-6T-jNJ" firstAttribute="leading" secondItem="z2x-NV-QC6" secondAttribute="trailing" constant="38" id="avw-6Z-HU1"/>
                             <constraint firstItem="PVC-5e-0gS" firstAttribute="leading" secondItem="nsZ-zM-4RC" secondAttribute="leading" id="b7x-QD-hyW"/>
                             <constraint firstItem="x61-lV-TXF" firstAttribute="top" secondItem="2ue-b9-ACT" secondAttribute="topMargin" constant="-35" id="jeF-JY-POG"/>
                             <constraint firstItem="lxs-6T-jNJ" firstAttribute="trailing" secondItem="kAq-ha-W2F" secondAttribute="trailing" id="kdP-mU-1Rc"/>
@@ -1500,7 +1500,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="M40-cb-RFu">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <rect key="frame" x="0.0" y="147" width="393" height="622"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatCell" id="gDd-Fz-gtF" customClass="ChatCell" customModule="AgriSmart_12" customModuleProvider="target">
@@ -1554,18 +1554,30 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zYV-Aa-khu">
+                                <rect key="frame" x="0.0" y="103" width="393" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Kue-fg-hwT" id="qSH-z5-SHZ"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jxv-So-FN6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="M40-cb-RFu" firstAttribute="top" secondItem="Jxv-So-FN6" secondAttribute="top" id="CM4-Ft-f0D"/>
+                            <constraint firstItem="M40-cb-RFu" firstAttribute="top" secondItem="zYV-Aa-khu" secondAttribute="bottom" id="52e-rF-Jap"/>
+                            <constraint firstItem="M40-cb-RFu" firstAttribute="top" secondItem="Jxv-So-FN6" secondAttribute="top" constant="44" id="CM4-Ft-f0D"/>
+                            <constraint firstItem="zYV-Aa-khu" firstAttribute="top" secondItem="Jxv-So-FN6" secondAttribute="top" id="Eki-yK-evL"/>
                             <constraint firstItem="M40-cb-RFu" firstAttribute="leading" secondItem="Jxv-So-FN6" secondAttribute="leading" id="JHw-JC-Dqk"/>
+                            <constraint firstItem="zYV-Aa-khu" firstAttribute="trailing" secondItem="M40-cb-RFu" secondAttribute="trailing" id="kTm-Yy-ZBb"/>
                             <constraint firstItem="Jxv-So-FN6" firstAttribute="trailing" secondItem="M40-cb-RFu" secondAttribute="trailing" id="nYK-BE-dxZ"/>
                             <constraint firstItem="Jxv-So-FN6" firstAttribute="bottom" secondItem="M40-cb-RFu" secondAttribute="bottom" id="ueD-VK-Yp6"/>
+                            <constraint firstItem="zYV-Aa-khu" firstAttribute="leading" secondItem="M40-cb-RFu" secondAttribute="leading" id="xs7-lR-5eU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Chats" id="pUe-3t-IdG"/>
                     <connections>
+                        <outlet property="SearchBar" destination="zYV-Aa-khu" id="uej-wn-8Gy"/>
                         <outlet property="tableView" destination="M40-cb-RFu" id="ADh-Dy-leH"/>
                         <segue destination="5wI-d6-bCp" kind="show" identifier="subChat" id="Use-ne-aNQ"/>
                     </connections>
@@ -1651,6 +1663,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="1Fg-42-GqB"/>
                     <connections>
+                        <outlet property="searchBar" destination="LNr-wT-aH4" id="ND5-ia-A9y"/>
                         <outlet property="tableView" destination="OxY-Nq-Swx" id="LFl-UR-bOC"/>
                     </connections>
                 </viewController>
@@ -1885,8 +1898,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="i9w-mG-5NW"/>
-        <segue reference="2RO-gN-zfT"/>
+        <segue reference="HfV-gG-Q4O"/>
+        <segue reference="eBg-et-OAD"/>
         <segue reference="d4I-4Z-JRk"/>
     </inferredMetricsTieBreakers>
     <resources>
