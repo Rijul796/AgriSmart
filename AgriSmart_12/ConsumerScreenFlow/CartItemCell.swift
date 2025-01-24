@@ -19,23 +19,26 @@ class CartItemCell: UITableViewCell {
     private var updateQuantity: ((Int) -> Void)?
     
     func configure(with item: CartItem, onQuantityChange: @escaping (Int) -> Void) {
-        
         nameLabel.text = item.name
         detailsLabel.text = item.details
-        priceLabel.text = "₹\(item.quantity * item.pricePerUnit)"
-        quantityLabel.text = "\(item.quantity)"
+        priceLabel.text = "₹\(item.quantity * item.pricePerUnit) per kg"
+        quantityLabel.text = "\(item.quantity) kg"
         quantityStepper.value = Double(item.quantity)
+        
+        // Set the product image or fallback to a default image
         if let imageName = item.imageName {
             productImageView.image = UIImage(named: imageName)
         } else {
             productImageView.image = UIImage(systemName: "leaf")
         }
+        
         updateQuantity = onQuantityChange
     }
+
     
     @IBAction func quantityChanged(_ sender: UIStepper) {
         let newQuantity = Int(sender.value)
-        quantityLabel.text = "\(newQuantity)"
+        quantityLabel.text = "\(newQuantity) Kg"
         updateQuantity?(newQuantity)
     }
 }

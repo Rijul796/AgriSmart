@@ -5,14 +5,14 @@ class consumerSignupViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
-    @IBOutlet weak var firmAddressTextField: UITextField!
-    @IBOutlet weak var firmNameTextField: UITextField!
-    @IBOutlet weak var regionCityTextField: UITextField!
+//    @IBOutlet weak var firmAddressTextField: UITextField!
+//    @IBOutlet weak var firmNameTextField: UITextField!
+//    @IBOutlet weak var regionCityTextField: UITextField!
     @IBOutlet weak var profileImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileImageView.backgroundColor = UIColor.gray
+        profileImageView.backgroundColor = UIColor.white
         setupProfileImageView()
     }
     
@@ -56,7 +56,6 @@ class consumerSignupViewController: UIViewController {
     }
 
     private func setupProfileImageView() {
-        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         profileImageView.layer.masksToBounds = true
         profileImageView.isUserInteractionEnabled = true
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectProfileImage)))
