@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setButtonTintColors()
-        IntroText.text = "Fresh, farm to table produce, no middlemen - just pure, straight from the source"
+        IntroText.text = "Fresh, farm to table produce, no middlemen Just pure, straight from the source"
  
         IntroText.textColor = UIColor(red: 32/255.0, green: 41/255.0, blue: 7/255.0, alpha: 1)
-        IntroText.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        IntroText.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         IntroText.textAlignment = .center
         IntroText.numberOfLines = 0 // Allow multiple lines
         

@@ -29,7 +29,7 @@ class FarmerProfileViewController: UIViewController {
     }
   
     private func setupUI() {
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
         if let farmerName = farmer?.profile.name {
             title = "\(farmerName)'s Profile" // Dynamically set the title
         } else {

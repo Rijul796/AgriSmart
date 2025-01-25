@@ -11,12 +11,15 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var farmersCollectionView: UICollectionView!
     @IBOutlet weak var cropsCollectionView: UICollectionView!
 
+    var cropCategories: [ProductCategory: [Product]] = [:]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFarmersCollectionView()
         setupCropsCollectionView()
         registerCollectionViewCells()
         setupNavigationBarIcons()
+        loadCropCategories()
     }
 
     private func setupFarmersCollectionView() {
@@ -24,46 +27,6 @@ class HomeViewController: UIViewController {
         farmersCollectionView.dataSource = self
         farmersCollectionView.collectionViewLayout = createFarmersLayout()
     }
-    
-    private func setupNavigationBarIcons() {
-        // Cart button
-        let cartButton = UIBarButtonItem(
-            image: UIImage(systemName: "cart"), // SF Symbol for cart
-            style: .plain,
-            target: self,
-            action: #selector(cartButtonTapped)
-        )
-        
-        // Notification button
-        let notificationButton = UIBarButtonItem(
-            image: UIImage(systemName: "bell"), // SF Symbol for notification
-            style: .plain,
-            target: self,
-            action: #selector(notificationButtonTapped)
-        )
-        
-        // Custom spacer to control the gap between buttons and edge of the screen
-        let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        leftSpacer.width = 5 // Adjust the gap from the left edge for the cart button
-        
-        let rightSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        rightSpacer.width = 5 // Adjust the gap from the right edge for the notification button
-
-        // Set the right bar button items in the correct order
-        navigationItem.rightBarButtonItems = [leftSpacer, cartButton, rightSpacer, notificationButton]
-    }
-
-    
-    @objc private func notificationButtonTapped() {
-        // Navigate to the notifications screen
-        performSegue(withIdentifier: "showNotifications", sender: self)
-    }
-
-    @objc private func cartButtonTapped() {
-        // Navigate to the cart screen
-        performSegue(withIdentifier: "showCart", sender: self)
-    }
-
 
     private func setupCropsCollectionView() {
         cropsCollectionView.delegate = self
@@ -74,6 +37,25 @@ class HomeViewController: UIViewController {
     private func registerCollectionViewCells() {
         farmersCollectionView.register(FarmerCell.self, forCellWithReuseIdentifier: "FarmerCell")
         cropsCollectionView.register(CropCell.self, forCellWithReuseIdentifier: "CropCell")
+        cropsCollectionView.register(
+            CropHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: "CropHeaderView"
+        )
+    }
+
+    private func setupNavigationBarIcons() {
+        let cartButton = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(cartButtonTapped))
+        let notificationButton = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: #selector(notificationButtonTapped))
+        navigationItem.rightBarButtonItems = [cartButton, notificationButton]
+    }
+
+    private func loadCropCategories() {
+        for crop in SampleData.products {
+            if let category = ProductCategory(rawValue: crop.category.rawValue) {
+                cropCategories[category, default: []].append(crop)
+            }
+        }
     }
 
     private func createFarmersLayout() -> UICollectionViewCompositionalLayout {
@@ -81,8 +63,8 @@ class HomeViewController: UIViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.4))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item, item])
 
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 10, trailing: 10)
@@ -91,84 +73,96 @@ class HomeViewController: UIViewController {
     }
 
     private func createCropsLayout() -> UICollectionViewCompositionalLayout {
-        // Define item size for 3 items in the first row
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        // Set minimal spacing between items
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
 
-        // Define group size (3 items in the first row)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(160))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item, item, item])
 
-        // Define section
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10) 
-        section.orthogonalScrollingBehavior = .continuous // Horizontal scrolling
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        section.boundarySupplementaryItems = [
+            NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50)),
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+        ]
 
-        // For subsequent rows, reuse the same group definition with minimal gaps
-        let additionalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120))
-        let additionalGroup = NSCollectionLayoutGroup.horizontal(layoutSize: additionalGroupSize, subitems: [item, item, item])
-
-        // Additional row section
-        let additionalSection = NSCollectionLayoutSection(group: additionalGroup)
-        additionalSection.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 10, bottom: 10, trailing: 10)
-
-        // Return the final layout
         return UICollectionViewCompositionalLayout(section: section)
     }
 
+    @objc private func cartButtonTapped() {
+        performSegue(withIdentifier: "showCart", sender: self)
+    }
+
+    @objc private func notificationButtonTapped() {
+        performSegue(withIdentifier: "showNotifications", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "showFarmerDetail",
-               let destinationVC = segue.destination as? FarmerProfileViewController,
-               let indexPath = farmersCollectionView.indexPathsForSelectedItems?.first {
-                let selectedFarmer = SampleData.farmers[indexPath.row]
-                destinationVC.farmer = selectedFarmer
-            } else if segue.identifier == "showProductDetail",
-                      let destinationVC = segue.destination as? ProductDetailViewController,
-                      let indexPath = cropsCollectionView.indexPathsForSelectedItems?.first {
-                let selectedProduct = SampleData.products[indexPath.row]
-                destinationVC.product = selectedProduct
-            }         else if segue.identifier == "showNotifications" {
-                _ = segue.destination as! NotificationViewController
-            } else if segue.identifier == "showCart" {
-                _ = segue.destination as! AddToCartViewController
-            }
+        if segue.identifier == "showFarmerDetail",
+           let destination = segue.destination as? FarmerProfileViewController,
+           let farmer = sender as? User {
+            destination.farmer = farmer
+        } else if segue.identifier == "showProductDetail",
+                  let destination = segue.destination as? ProductDetailViewController,
+                  let product = sender as? Product {
+            destination.product = product
         }
-
-
+    }
 }
 
-// Extension for UICollectionViewDelegate and UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return collectionView == cropsCollectionView ? cropCategories.keys.count : 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionView == farmersCollectionView ? SampleData.farmers.count : SampleData.products.count
+        if collectionView == cropsCollectionView {
+            let category = Array(cropCategories.keys)[section]
+            return cropCategories[category]?.count ?? 0
+        }
+        return SampleData.farmers.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == farmersCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FarmerCell", for: indexPath) as! FarmerCell
-            let farmer = SampleData.farmers[indexPath.row]
-            cell.configure(with: farmer)
+            cell.configure(with: SampleData.farmers[indexPath.row])
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CropCell", for: indexPath) as! CropCell
-            let product = SampleData.products[indexPath.row]
-            cell.configure(with: product)
+            let category = Array(cropCategories.keys)[indexPath.section]
+            if let crop = cropCategories[category]?[indexPath.row] {
+                cell.configure(with: crop)
+            }
             return cell
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == farmersCollectionView {
-            performSegue(withIdentifier: "showFarmerDetail", sender: self)
-        } else if collectionView == cropsCollectionView {
-            performSegue(withIdentifier: "showProductDetail", sender: self)
+            let farmer = SampleData.farmers[indexPath.row]
+            performSegue(withIdentifier: "showFarmerDetail", sender: farmer)
+        } else {
+            let category = Array(cropCategories.keys)[indexPath.section]
+            if let crop = cropCategories[category]?[indexPath.row] {
+                performSegue(withIdentifier: "showProductDetail", sender: crop)
+            }
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: "CropHeaderView",
+            for: indexPath
+        ) as! CropHeaderView
+
+        let category = Array(cropCategories.keys)[indexPath.section]
+        header.titleLabel.text = category.rawValue
+        return header
     }
 }

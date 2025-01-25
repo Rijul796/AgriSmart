@@ -71,8 +71,8 @@ class DetailChatViewController: UIViewController , UITextFieldDelegate, UIImageP
         navView.heightAnchor.constraint(equalToConstant: 40).isActive = true
          messageTextField.placeholder = "Type a message..."
         messageTextField.delegate = self
-        messageTextField.backgroundColor = .white
-        messageTextField.textColor = .black
+//        messageTextField.backgroundColor = .white
+//        messageTextField.textColor = .black
 
         sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
     }
@@ -89,8 +89,8 @@ class DetailChatViewController: UIViewController , UITextFieldDelegate, UIImageP
       }
 
       private func setupMessageInput() {
-          messageTextField.layer.cornerRadius = 20
-          messageTextField.layer.borderWidth = 1
+          messageTextField.layer.cornerRadius = 18
+          messageTextField.layer.borderWidth = 2
           messageTextField.layer.borderColor = UIColor.systemGray4.cgColor
           messageTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 40))
           messageTextField.leftViewMode = .always

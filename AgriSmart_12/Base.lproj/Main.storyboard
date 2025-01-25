@@ -237,7 +237,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZw-PI-uqE">
-                                <rect key="frame" x="121" y="585" width="143.66666666666652" height="35.666666666666629"/>
+                                <rect key="frame" x="120.99999999999999" y="585" width="143.66666666666663" height="35.666666666666629"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35.666666666666629" id="s9K-oP-N9V"/>
                                 </constraints>

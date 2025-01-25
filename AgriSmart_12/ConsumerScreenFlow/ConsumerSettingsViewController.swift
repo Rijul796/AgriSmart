@@ -23,6 +23,9 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
 
         // Observe UserDefaults updates
         NotificationCenter.default.addObserver(self, selector: #selector(updateHeaderProfile), name: UserDefaults.didChangeNotification, object: nil)
+        
+        // Apply saved dark mode preference
+        applySavedDarkModePreference()
     }
     
     // MARK: - Update Header Profile
@@ -39,7 +42,6 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
         return sections[section]
     }
 
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == 0 ? accountSettings.count : moreOptions.count
     }
@@ -51,13 +53,16 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
             cell.textLabel?.text = accountSettings[indexPath.row]
             if indexPath.row == 2 || indexPath.row == 3 {
                 let toggleSwitch = UISwitch()
-                toggleSwitch.isOn = indexPath.row == 2
+                toggleSwitch.isOn = (indexPath.row == 2) || (indexPath.row == 3 && isDarkModeEnabled())
                 toggleSwitch.addTarget(self, action: #selector(switchToggled(_:)), for: .valueChanged)
                 toggleSwitch.tag = indexPath.row
                 cell.accessoryView = toggleSwitch
+            } else {
+                cell.accessoryView = nil
             }
         } else {
             cell.textLabel?.text = moreOptions[indexPath.row]
+            cell.accessoryView = nil
         }
         return cell
     }
@@ -68,7 +73,29 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
             print("Push notifications toggled: \(sender.isOn)")
         } else if sender.tag == 3 {
             print("Dark mode toggled: \(sender.isOn)")
+            toggleDarkMode(isDarkMode: sender.isOn)
         }
+    }
+    
+    private func toggleDarkMode(isDarkMode: Bool) {
+        // Save the user's preference in UserDefaults
+        UserDefaults.standard.set(isDarkMode, forKey: "isDarkModeEnabled")
+        
+        // Update the app's appearance
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.overrideUserInterfaceStyle = isDarkMode ? .dark : .light
+        }
+    }
+
+    private func applySavedDarkModePreference() {
+        let isDarkModeEnabled = UserDefaults.standard.bool(forKey: "isDarkModeEnabled")
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.overrideUserInterfaceStyle = isDarkModeEnabled ? .dark : .light
+        }
+    }
+
+    private func isDarkModeEnabled() -> Bool {
+        return UserDefaults.standard.bool(forKey: "isDarkModeEnabled")
     }
     
     @IBSegueAction func goToHelpDesk(_ coder: NSCoder) -> ConsumerHelpDeskViewController? {
@@ -85,8 +112,6 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
     // MARK: - Header with Profile
     private func addHeaderForProfile() {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 150))
-        headerView.backgroundColor = .white
-        
         // Profile Image View
         let profileImageView = UIImageView(frame: CGRect(x: (view.frame.width - 80) / 2, y: 20, width: 80, height: 80))
         profileImageView.contentMode = .scaleAspectFill
@@ -129,7 +154,7 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
         logoutButton.setTitle("Logout", for: .normal)
         logoutButton.setTitleColor(.white, for: .normal)
         logoutButton.backgroundColor = .systemRed
-        logoutButton.layer.cornerRadius = 8 // Adjusted for better appearance
+        logoutButton.layer.cornerRadius = 8
         logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
         
         footerView.addSubview(logoutButton)
@@ -137,8 +162,8 @@ class ConsumerSettingsViewController: UIViewController, UITableViewDelegate, UIT
         NSLayoutConstraint.activate([
             logoutButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
             logoutButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor, constant: -25),
-            logoutButton.widthAnchor.constraint(equalTo: footerView.widthAnchor, multiplier: 0.3), // Adjusted width
-            logoutButton.heightAnchor.constraint(equalToConstant: 44) // Standard height for buttons
+            logoutButton.widthAnchor.constraint(equalTo: footerView.widthAnchor, multiplier: 0.3),
+            logoutButton.heightAnchor.constraint(equalToConstant: 44)
         ])
         
         tableView.tableFooterView = footerView
