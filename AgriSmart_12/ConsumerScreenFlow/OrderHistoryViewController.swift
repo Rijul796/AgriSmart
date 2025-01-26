@@ -1,9 +1,11 @@
+
 import UIKit
 
 class OrderHistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var noOrdersLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView! 
+    @IBOutlet weak var tableView: UITableView!
+    
     // Array to hold order history data
     var orderHistory: [OrderHistory] = []
 
@@ -59,20 +61,26 @@ class OrderHistoryViewController: UIViewController, UITableViewDataSource, UITab
         return 120 // Set a fixed height of 120 for each cell
     }
 
-    // Swipe-to-Delete functionality
+    // Swipe-to-Delete functionality with confirmation alert
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Remove the item from the order history
-            orderHistory.remove(at: indexPath.row)
-            
-            // Save the updated order history
-            saveOrderHistory(orderHistory)
-            
-            // Delete the row from the table view
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            // Show confirmation alert before deleting
+            let alert = UIAlertController(title: "Delete Order", message: "Are you sure you want to delete this order?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil)) // Cancel button
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                // Remove the item from the order history
+                self.orderHistory.remove(at: indexPath.row)
+                
+                // Save the updated order history
+                self.saveOrderHistory(self.orderHistory)
+                
+                // Delete the row from the table view
+                tableView.deleteRows(at: [indexPath], with: .automatic)
 
-            // Check if the array is empty and update the UI
-            updateUI()
+                // Check if the array is empty and update the UI
+                self.updateUI()
+            }))
+            present(alert, animated: true, completion: nil)
         }
     }
 

@@ -1,31 +1,39 @@
-//
-//  NotificationViewController.swift
-//  AgriSmart_12
-//
-//  Created by Rohan Jain on 26/12/24.
-//
-
 import UIKit
 
-// MARK: - NotificationViewController 
+// MARK: - NotificationViewController
 class NotificationViewController: UIViewController {
     
     // MARK: - Properties
     @IBOutlet weak var tableView: UITableView!
     var notifications: [NotificationModel] = [] // Data source for the table view
+    private let noNotificationsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No new notifications"
+        label.textColor = .gray
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.isHidden = true // Initially hidden
+        return label
+    }()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupTableView()
-        populateNotifications() // Populate data (Step begins here)
+        populateNotifications() // Populate data
+        updateNoNotificationsLabel() // Update the empty state UI
     }
 
     // MARK: - Setup Methods
     private func setupUI() {
         title = "Notifications"
-        view.backgroundColor = .white
+        view.addSubview(noNotificationsLabel)
+
+        // Constraints for the label
+        noNotificationsLabel.translatesAutoresizingMaskIntoConstraints = false
+        noNotificationsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noNotificationsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 
     private func setupTableView() {
@@ -44,6 +52,12 @@ class NotificationViewController: UIViewController {
         ]
         tableView.reloadData() // Reload the table view after populating
     }
+
+    // MARK: - Empty State Update
+    private func updateNoNotificationsLabel() {
+        noNotificationsLabel.isHidden = !notifications.isEmpty
+        tableView.isHidden = notifications.isEmpty
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -59,6 +73,26 @@ extension NotificationViewController: UITableViewDataSource {
         let notification = notifications[indexPath.row]
         cell.configure(with: notification) // Configure cell
         return cell
+    }
+
+    // Swipe to delete
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Confirmation alert before deletion
+            let alert = UIAlertController(title: "Delete Notification", message: "Are you sure you want to delete this notification?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                // Remove notification from the data source
+                self.notifications.remove(at: indexPath.row)
+
+                // Delete the row with animation
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+
+                // Update empty state UI
+                self.updateNoNotificationsLabel()
+            }))
+            present(alert, animated: true, completion: nil)
+        }
     }
 }
 
