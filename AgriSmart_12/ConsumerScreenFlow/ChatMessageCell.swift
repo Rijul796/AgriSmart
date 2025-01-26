@@ -78,5 +78,4 @@ class ChatMessageCell: UITableViewCell {
                 messageBubbleView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -48).isActive = true
             }
         }
-
 }

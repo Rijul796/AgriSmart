@@ -1,10 +1,3 @@
-//
-//  HomeViewController.swift
-//  AgriSmart_12
-//
-//  Created by Rohan Jain on 20/01/25.
-//
-
 import UIKit
 
 class HomeViewController: UIViewController {

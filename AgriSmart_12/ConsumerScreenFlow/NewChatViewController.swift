@@ -105,6 +105,7 @@ class NewChatViewController: UIViewController, UIDocumentPickerDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
         cell.textLabel?.text = messages[indexPath.row] // Display message in the cell
+        cell.textLabel?.textAlignment = .right
         return cell
     }
 

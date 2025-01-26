@@ -354,16 +354,14 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Farmer Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpq-cb-qCo">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Farmer Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpq-cb-qCo">
                                 <rect key="frame" x="16" y="101" width="122" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Suggested Crops" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKa-wE-R5e">
-                                <rect key="frame" x="16" y="434" width="149" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crops" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKa-wE-R5e">
+                                <rect key="frame" x="16" y="421" width="52" height="22"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -375,10 +373,14 @@
                         <constraints>
                             <constraint firstItem="JSm-Y6-Xd9" firstAttribute="trailing" secondItem="HFL-CS-OSk" secondAttribute="trailing" id="2Ja-jT-lug"/>
                             <constraint firstItem="tZV-5d-Vm4" firstAttribute="centerX" secondItem="PrE-Cm-CMv" secondAttribute="centerX" id="4Dm-vK-54i"/>
+                            <constraint firstItem="xKa-wE-R5e" firstAttribute="leading" secondItem="zpq-cb-qCo" secondAttribute="leading" id="5nl-GA-FxY"/>
                             <constraint firstItem="JSm-Y6-Xd9" firstAttribute="bottom" secondItem="HFL-CS-OSk" secondAttribute="bottom" id="Hjv-W9-436"/>
+                            <constraint firstItem="xKa-wE-R5e" firstAttribute="leading" secondItem="PrE-Cm-CMv" secondAttribute="leadingMargin" id="MkF-I5-YCA"/>
                             <constraint firstItem="HFL-CS-OSk" firstAttribute="leading" secondItem="JSm-Y6-Xd9" secondAttribute="leading" id="UIZ-co-G8A"/>
                             <constraint firstItem="tZV-5d-Vm4" firstAttribute="top" secondItem="JSm-Y6-Xd9" secondAttribute="top" constant="27" id="VE6-T5-jhF"/>
                             <constraint firstItem="tZV-5d-Vm4" firstAttribute="leading" secondItem="JSm-Y6-Xd9" secondAttribute="leading" id="kQM-gk-2sM"/>
+                            <constraint firstItem="xKa-wE-R5e" firstAttribute="top" secondItem="tZV-5d-Vm4" secondAttribute="bottom" constant="8" id="l9f-Dv-E28"/>
+                            <constraint firstItem="tZV-5d-Vm4" firstAttribute="top" secondItem="zpq-cb-qCo" secondAttribute="bottom" constant="7" id="lTU-hF-vl9"/>
                             <constraint firstItem="JSm-Y6-Xd9" firstAttribute="bottom" secondItem="tZV-5d-Vm4" secondAttribute="bottom" constant="356" id="oKm-tt-Teg"/>
                             <constraint firstItem="HFL-CS-OSk" firstAttribute="top" secondItem="tZV-5d-Vm4" secondAttribute="bottom" constant="36" id="v42-VP-ABD"/>
                         </constraints>
@@ -1881,9 +1883,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="HfV-gG-Q4O"/>
-        <segue reference="eBg-et-OAD"/>
-        <segue reference="nXh-uw-bRh"/>
+        <segue reference="i9w-mG-5NW"/>
+        <segue reference="2RO-gN-zfT"/>
+        <segue reference="d4I-4Z-JRk"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image 5" width="804" height="716"/>
@@ -1908,7 +1910,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
