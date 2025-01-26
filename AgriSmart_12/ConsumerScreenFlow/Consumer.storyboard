@@ -727,7 +727,6 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HKh-Ly-8iT"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HKh-Ly-8iT" firstAttribute="trailing" secondItem="2Ve-2Z-cxk" secondAttribute="trailing" id="5Wp-fc-AzA"/>
                             <constraint firstItem="2Ve-2Z-cxk" firstAttribute="leading" secondItem="HKh-Ly-8iT" secondAttribute="leading" id="KQg-R3-biz"/>
