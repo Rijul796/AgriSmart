@@ -18,7 +18,8 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var deliveryAvailabilityLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var reviewsTableView: UITableView!
-
+    @IBOutlet weak var descriptionText: UITextView!
+    
     // MARK: - Properties
     var product: Product?
     var isProductInCart = false
@@ -38,6 +39,9 @@ class ProductDetailViewController: UIViewController {
         productPriceLabel.text = product.formattedPrice
         productRatingLabel.text = "Rating: \(product.rating ?? 0.0) (\(product.reviewsCount) reviews)"
         deliveryAvailabilityLabel.text = "Yes Available!"
+        descriptionText.text = product.description
+        descriptionText.isEditable = false
+        descriptionText.font = UIFont.systemFont(ofSize: 20)
         updateAddToCartButton()
     }
 
