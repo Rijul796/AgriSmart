@@ -246,7 +246,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Farmers" id="yEz-kl-1hh"/>
                     <connections>
-                        <segue destination="VZW-HC-Psl" kind="show" identifier="showFarmerDetail" id="nXh-uw-bRh"/>
+                        <segue destination="VZW-HC-Psl" kind="show" identifier="showFarmerDetail" animates="NO" id="nXh-uw-bRh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q2V-wa-7nQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -389,7 +389,7 @@
                     <connections>
                         <outlet property="cropsCollectionView" destination="HFL-CS-OSk" id="lf6-ab-6vr"/>
                         <outlet property="farmersCollectionView" destination="tZV-5d-Vm4" id="rxb-QW-Quv"/>
-                        <segue destination="VZW-HC-Psl" kind="show" identifier="showFarmerDetail" id="d4I-4Z-JRk"/>
+                        <segue destination="VZW-HC-Psl" kind="show" identifier="showFarmerDetail" animates="NO" id="d4I-4Z-JRk"/>
                         <segue destination="6Af-qy-qaU" kind="show" identifier="showNotifications" id="jIN-Ae-FRT"/>
                         <segue destination="t3v-1e-Fy3" kind="show" identifier="showCart" id="2RO-gN-zfT"/>
                     </connections>
@@ -673,7 +673,7 @@
                         <outlet property="messageButton" destination="mfQ-vG-mDr" id="suG-KC-PrT"/>
                         <outlet property="tableView" destination="gTf-GZ-WDP" id="dOb-1s-gyE"/>
                         <segue destination="Ye5-7U-xei" kind="show" identifier="showProductDetail" id="HfV-gG-Q4O"/>
-                        <segue destination="it0-gY-ywa" kind="show" identifier="newChat" id="ZBZ-p1-lSJ"/>
+                        <segue destination="it0-gY-ywa" kind="show" identifier="newChat" animates="NO" id="ZBZ-p1-lSJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q7Z-d3-1od" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1569,7 +1569,7 @@
                     <connections>
                         <outlet property="SearchBar" destination="zYV-Aa-khu" id="uej-wn-8Gy"/>
                         <outlet property="tableView" destination="M40-cb-RFu" id="ADh-Dy-leH"/>
-                        <segue destination="5wI-d6-bCp" kind="show" identifier="subChat" id="Use-ne-aNQ"/>
+                        <segue destination="5wI-d6-bCp" kind="show" identifier="subChat" animates="NO" id="Use-ne-aNQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vRV-MZ-Phg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1882,9 +1882,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="i9w-mG-5NW"/>
+        <segue reference="HfV-gG-Q4O"/>
         <segue reference="2RO-gN-zfT"/>
-        <segue reference="d4I-4Z-JRk"/>
+        <segue reference="nXh-uw-bRh"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Image 5" width="804" height="716"/>

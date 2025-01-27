@@ -78,15 +78,39 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            // Get the chat item to delete
             let chatToDelete = filteredChats[indexPath.row]
 
-            // Remove from both filteredChats and chats array
-            if let indexInOriginalArray = chats.firstIndex(where: { $0.username == chatToDelete.username && $0.message == chatToDelete.message }) {
-                chats.remove(at: indexInOriginalArray)
-            }
-            filteredChats.remove(at: indexPath.row)
+            // Create an alert controller for confirmation
+            let alertController = UIAlertController(
+                title: "Delete Chat",
+                message: "Are you sure you want to delete this chat?",
+                preferredStyle: .alert
+            )
+            
+            // Add Cancel action to dismiss the alert
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            // Add Delete action to confirm deletion
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+                // Perform the deletion if confirmed
+                
+                // Remove from both filteredChats and chats array
+                if let indexInOriginalArray = self.chats.firstIndex(where: { $0.username == chatToDelete.username && $0.message == chatToDelete.message }) {
+                    self.chats.remove(at: indexInOriginalArray)
+                }
+                self.filteredChats.remove(at: indexPath.row)
 
-            tableView.deleteRows(at: [indexPath], with: .fade)
+                // Delete the row from the table view with animation
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
+            // Add actions to the alert controller
+            alertController.addAction(cancelAction)
+            alertController.addAction(deleteAction)
+            
+            // Present the alert controller
+            present(alertController, animated: true, completion: nil)
         }
     }
 }

@@ -75,23 +75,16 @@ extension NotificationViewController: UITableViewDataSource {
         return cell
     }
 
-    // Swipe to delete
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Confirmation alert before deletion
-            let alert = UIAlertController(title: "Delete Notification", message: "Are you sure you want to delete this notification?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-                // Remove notification from the data source
-                self.notifications.remove(at: indexPath.row)
+            // Remove notification from the data source
+            self.notifications.remove(at: indexPath.row)
 
-                // Delete the row with animation
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+            // Delete the row with animation
+            tableView.deleteRows(at: [indexPath], with: .automatic)
 
-                // Update empty state UI
-                self.updateNoNotificationsLabel()
-            }))
-            present(alert, animated: true, completion: nil)
+            // Update empty state UI
+            self.updateNoNotificationsLabel()
         }
     }
 }

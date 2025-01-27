@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 struct ChatMessage {
     let content: String
     let isFromCurrentUser: Bool

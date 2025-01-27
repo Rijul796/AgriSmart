@@ -62,15 +62,6 @@ class FarmerCell: UICollectionViewCell {
         profileImageView.image = UIImage(named: user.profile.profileImageUrl ?? "default_image")
     }
 
-//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//        super.traitCollectionDidChange(previousTraitCollection)
-//        
-//        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-//            if let background = contentView.viewWithTag(100) {
-//                background.backgroundColor = traitCollection.userInterfaceStyle == .dark ? .darkGray : UIColor(white: 0.95, alpha: 1)
-//            }
-//        }
-//    }
     override func updateConfiguration(using state: UICellConfigurationState) {
         super.updateConfiguration(using: state)
         
